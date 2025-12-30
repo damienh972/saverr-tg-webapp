@@ -6,9 +6,10 @@ import { toUSDC } from "../lib/transactionUtils";
 
 const depositAddress = "0x4c0FeD497BC2868E1010C8eC8bEfcfCd3013601b";
 
-export const TransferButton = ({
+export const TransferButton = ({amount,
   callback,
 }: {
+  amount: number;
   callback: (result: any) => void;
 }) => {
   const account = useActiveAccount();
@@ -22,16 +23,16 @@ export const TransferButton = ({
   const contract = getContract({
     client: thirdwebClient,
     chain: sepolia,
-    address: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+    address: "0x6B450d0772914E74D933264A5e5c9059071CF08D",
   });
-  console.log("to usdc", toUSDC(0.1));
+
   return (
     <TransactionButton
       transaction={() =>
         prepareContractCall({
           contract,
           method: "function transfer(address to, uint256 value)",
-          params: [depositAddress, 1n],
+          params: [depositAddress, toUSDC(amount)],
         })
       }
       onTransactionSent={(result) =>

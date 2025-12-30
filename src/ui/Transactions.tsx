@@ -5,7 +5,7 @@ import TransactionDetails from "./TransactionDetails";
 type Tx = {
   id: string;
   reference?: string;
-  amount?: number;
+  amount: number;
   currency?: string;
   status?: string;
   created?: string;

@@ -6,7 +6,7 @@ import { getFundsInInstructions, getFundsOutInstructions } from "../lib/transact
 type Tx = {
   id: string;
   reference?: string;
-  amount?: number;
+  amount: number;
   currency?: string;
   status?: string;
   created?: string;
@@ -36,11 +36,6 @@ function formatStatus(status?: string) {
   if (!status) return "Inconnu";
   return STATUS_LABELS[status] || status;
 }
-
-// async function handleWeb3transfer(amount) {
-//   await web3Transfer(amount);
-//   handleStatusChange("TRANSFERRED");
-// }
 
 export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
   const [loading, setLoading] = React.useState(false);
@@ -103,14 +98,7 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
 
         {tx.status === "DEPOSITED" && (
           <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
-            <TransferButton callback={handleStatusChange}/>
-            {/* <button
-              className="btn btn-primary"
-              disabled={loading}
-              onClick={() => handleWeb3transfer(tx.amount)}
-            >
-              
-            </button> */}
+            <TransferButton amount={tx.amount} callback={handleStatusChange}/>
           </div>
         )}
 

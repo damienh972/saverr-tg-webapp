@@ -88,3 +88,4 @@ export function getFundsOutInstructions(fundsOut: string, iban?: string, phone?:
 export const toUSDC = (amount: number): bigint => {
   return BigInt(Math.floor(amount * 1_000_000));
 };
+
