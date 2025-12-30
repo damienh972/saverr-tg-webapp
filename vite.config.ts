@@ -7,6 +7,8 @@ export default defineConfig(({ mode }): UserConfig => ({
     host: true,
     port: 5173,
     // add local ngrok host for dev
-    allowedHosts: true
+    allowedHosts: [
+      "https://demobot.saverr.io/"
+    ]
   },
 }));
