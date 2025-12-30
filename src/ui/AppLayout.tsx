@@ -49,8 +49,8 @@ export default function AppLayout() {
     return (
       <div className="container">
         <div className="card">
-          <div style={{ fontSize: 18, fontWeight: 700 }}>Bienvenue chez Saverr</div>
-          <div className="muted">Étape 1/2 : Vérification KYC</div>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>Saverr, votre assistant personnalisé</div>
+          <div className="muted">Étape 1/2 : Identification et vérifications</div>
         </div>
         <Start kycStatus={kyc} />
       </div>
@@ -62,8 +62,8 @@ export default function AppLayout() {
     return (
       <div className="container">
         <div className="card">
-          <div style={{ fontSize: 18, fontWeight: 700 }}>Bienvenue chez Saverr</div>
-          <div className="muted">Étape 2/2 : Création de wallet</div>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>Saverr, votre assistant personnalisé</div>
+          <div className="muted">Étape 2/2 : Création du portefeuille électronique</div>
         </div>
         <Wallet />
       </div>
