@@ -1,4 +1,5 @@
 import React from "react";
+import { TransferButton } from "./TransferButton";
 import { updateTransactionStatus } from "../lib/api";
 import { getFundsInInstructions, getFundsOutInstructions } from "../lib/transactionUtils";
 
@@ -25,6 +26,8 @@ const STATUS_LABELS: Record<string, string> = {
   CREATED: "Créée",
   AWAITING_CONFIRMATION: "En attente de confirmation",
   PROCESSING: "En cours",
+  DEPOSITED: "dépot effectué",
+  TRANSFERRED: "transfer effectué",
   COMPLETED: "Terminée",
   CANCELLED: "Annulée",
 };
@@ -34,13 +37,18 @@ function formatStatus(status?: string) {
   return STATUS_LABELS[status] || status;
 }
 
+// async function handleWeb3transfer(amount) {
+//   await web3Transfer(amount);
+//   handleStatusChange("TRANSFERRED");
+// }
+
 export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
   const canConfirmOrCancel = tx.status === "AWAITING_CONFIRMATION";
 
-  async function handleStatusChange(status: "PROCESSING" | "CANCELLED") {
+  async function handleStatusChange(status: "PROCESSING" | "CANCELLED" | "TRANSFERRED") {
     try {
       setLoading(true);
       setError(null);
@@ -90,6 +98,19 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
             <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
               Copiez ces informations et effectuez le dépôt
             </div>
+          </div>
+        )}
+
+        {tx.status === "DEPOSITED" && (
+          <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
+            <TransferButton callback={handleStatusChange}/>
+            {/* <button
+              className="btn btn-primary"
+              disabled={loading}
+              onClick={() => handleWeb3transfer(tx.amount)}
+            >
+              
+            </button> */}
           </div>
         )}
 

@@ -84,3 +84,7 @@ export function getFundsOutInstructions(fundsOut: string, iban?: string, phone?:
       return "";
   }
 }
+
+export const toUSDC = (amount: number): bigint => {
+  return BigInt(Math.floor(amount * 1_000_000));
+};
