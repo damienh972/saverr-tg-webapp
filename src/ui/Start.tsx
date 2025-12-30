@@ -17,7 +17,7 @@ export default function Start({ kycStatus }: Props) {
     setLoading(true);
     try {
       const c = await requestContactSafe();
-      const tel = `+${ c?.contact?.phone_number }`;
+      const tel = `${ c?.contact?.phone_number }`;
       if (!tel) throw new Error("Téléphone non partagé.");
       setPhone(tel);
 

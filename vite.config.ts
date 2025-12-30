@@ -6,8 +6,6 @@ export default defineConfig(({ mode }): UserConfig => ({
   server: {
     host: true,
     port: 5173,
-    allowedHosts: [
-      "posingly-abrogable-audry.ngrok-free.dev",
-    ],
+    allowedHosts: true,
   },
 }));
