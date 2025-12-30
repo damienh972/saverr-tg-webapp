@@ -1,4 +1,5 @@
 import React from "react";
+import { TransferButton } from "./TransferButton";
 import { updateTransactionStatus } from "../lib/api";
 import {
   getFundsInInstructions,
@@ -8,7 +9,7 @@ import {
 type Tx = {
   id: string;
   reference?: string;
-  amount?: number;
+  amount: number;
   currency?: string;
   status?: string;
   created?: string;
@@ -28,6 +29,8 @@ const STATUS_LABELS: Record<string, string> = {
   CREATED: "Créée",
   AWAITING_CONFIRMATION: "En attente de confirmation",
   PROCESSING: "En cours",
+  DEPOSITED: "dépot effectué",
+  TRANSFERRED: "transfer effectué",
   COMPLETED: "Terminée",
   CANCELLED: "Annulée",
 };
@@ -43,7 +46,7 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
 
   const canConfirmOrCancel = tx.status === "AWAITING_CONFIRMATION";
 
-  async function handleStatusChange(status: "PROCESSING" | "CANCELLED") {
+  async function handleStatusChange(status: "PROCESSING" | "CANCELLED" | "TRANSFERRED") {
     try {
       setLoading(true);
       setError(null);
@@ -118,6 +121,12 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
             <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
               Copiez ces informations et effectuez le dépôt
             </div>
+          </div>
+        )}
+
+        {tx.status === "DEPOSITED" && (
+          <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
+            <TransferButton amount={tx.amount} callback={handleStatusChange}/>
           </div>
         )}
 

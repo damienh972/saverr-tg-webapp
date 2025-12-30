@@ -31,7 +31,7 @@ export async function apiJson<T>(
   return res.json();
 }
 
-export async function updateTransactionStatus(id: string, status: "PROCESSING" | "CANCELLED"): Promise<any> {
+export async function updateTransactionStatus(id: string, status: "PROCESSING" | "CANCELLED" | "TRANSFERRED"): Promise<any> {
   return apiJson(`/api/transaction/${id}/status`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

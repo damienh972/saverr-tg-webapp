@@ -5,7 +5,7 @@ import { getLaunchSafe } from "../lib/tma";
 export type MeUser = {
   id: string;
   telegram_user_id?: string;
-  kyc_status?: "NOT_STARTED" | "SUBMITTED" | "APPROVED" | "REJECTED" | string;
+  kyc_status?: "DRAFT" | "SUBMITTED" | "APPROVED" | "REJECTED" | string;
   user_tw_eoa?: string | null;
   iban?: string | null;
   phone?: string | null;

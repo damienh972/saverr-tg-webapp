@@ -6,10 +6,9 @@ export default defineConfig(({ mode }): UserConfig => ({
   server: {
     host: true,
     port: 5173,
+    // add local ngrok host for dev
     allowedHosts: [
-      /* "pseudogyrate-pleuritic-lesia.ngrok-free.dev" */
-      "90ab61c6a758.ngrok-free.app",
-      "https://demo_bot.saverr.io/"
-    ],
+      "https://demobot.saverr.io"
+    ]
   },
 }));
