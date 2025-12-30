@@ -17,7 +17,7 @@ export default function Wallet() {
         auth: { options: ["email", "google"] },
       }),
     ],
-    [],
+    []
   );
 
   useEffect(() => {
@@ -34,17 +34,26 @@ export default function Wallet() {
 
   return (
     <div className="card">
-      <div style={{ fontWeight: 700, marginBottom: 6 }}>Connexion wallet (thirdweb)</div>
+      <div style={{ fontWeight: 700, marginBottom: 6 }}>
+        Connexion wallet (thirdweb)
+      </div>
       <div className="muted">
-        Connecte-toi via Email ou Google pour créer ton wallet et ton IBAN virtuel.
+        Connectez-vous avec un Email ou un compte Google pour créer votre
+        portefeuille électronque ainsi que votre IBAN virtuel.
       </div>
       <div style={{ height: 10 }} />
 
       <ConnectButton client={thirdwebClient} wallets={wallets} />
 
       <div style={{ height: 10 }} />
-      {account?.address && <div className="badge">Adresse: {account.address}</div>}
-      {saved && <div style={{ marginTop: 10 }}>✅ Wallet enregistré !</div>}
+      {account?.address && (
+        <div className="badge">Adresse: {account.address}</div>
+      )}
+      {saved && (
+        <div style={{ marginTop: 10 }}>
+          ✅ Votre portefeuille électronique a été enregistré avec succès!
+        </div>
+      )}
       {err && <div style={{ marginTop: 10, color: "#ff9aa2" }}>{err}</div>}
     </div>
   );

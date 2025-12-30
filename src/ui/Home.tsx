@@ -13,7 +13,7 @@ export default function Home() {
           Historique de mes transferts
         </Link>
         <Link className="btn" to="/new-transaction">
-          Nouveau transfert
+          Effectuer un nouveau transfert
         </Link>
       </div>
     </div>
