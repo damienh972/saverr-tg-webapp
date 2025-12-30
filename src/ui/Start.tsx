@@ -42,8 +42,8 @@ export default function Start({ kycStatus }: Props) {
       <div className="card">
         <div style={{ fontWeight: 700, marginBottom: 6 }}>Statut KYC</div>
 
-        {/* NOT_STARTED */}
-        {kycStatus === "NOT_STARTED" && (
+        {/* DRAFT */}
+        {kycStatus === "DRAFT" && (
           <>
             <div className="muted">
               Merci de partager votre numéro afin de démarrer votre vérification KYC.
@@ -79,8 +79,8 @@ export default function Start({ kycStatus }: Props) {
         )}
       </div>
 
-      {/* Onboarding link (only shown if NOT_STARTED and URL obtained) */}
-      {onboardingUrl && kycStatus === "NOT_STARTED" && (
+      {/* Onboarding link (only shown if DRAFT and URL obtained) */}
+      {onboardingUrl && kycStatus === "DRAFT" && (
         <div className="card">
           <div style={{ fontWeight: 700, marginBottom: 6 }}>Lien KYC</div>
           <a className="btn" href={onboardingUrl} target="_blank" rel="noreferrer">

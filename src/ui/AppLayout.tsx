@@ -40,11 +40,11 @@ export default function AppLayout() {
     );
   }
 
-  const kyc = user?.kyc_status || "NOT_STARTED";
+  const kyc = user?.kyc_status || "DRAFT";
   const isApproved = kyc === "APPROVED";
   const hasWallet = !!user?.user_tw_eoa;
 
-  // Step 1: KYC verification (NOT_STARTED / SUBMITTED / REJECTED / APPROVED)
+  // Step 1: KYC verification (DRAFT / SUBMITTED / REJECTED / APPROVED)
   if (!isApproved) {
     return (
       <div className="container">
