@@ -6,9 +6,15 @@ export default function Home() {
     <div className="card">
       <div style={{ fontWeight: 700, marginBottom: 10 }}>Menu</div>
       <div className="row">
-        <Link className="btn" to="/me">Mes informations</Link>
-        <Link className="btn" to="/transactions">Voir mes transactions</Link>
-        <Link className="btn" to="/new-transaction">Nouvelle transaction</Link>
+        <Link className="btn" to="/me">
+          Mes informations
+        </Link>
+        <Link className="btn" to="/transactions">
+          Historique de mes transferts
+        </Link>
+        <Link className="btn" to="/new-transaction">
+          Nouveau transfert
+        </Link>
       </div>
     </div>
   );

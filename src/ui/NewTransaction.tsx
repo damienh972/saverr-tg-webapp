@@ -28,7 +28,7 @@ export default function TransactionForm() {
     amount: "",
     currency: "",
     depositMode: "",
-    receiveMode: ""
+    receiveMode: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -112,17 +112,20 @@ export default function TransactionForm() {
     }
 
     try {
-      const response = await apiJson<TransactionSubmitResponse>("/api/transaction/submit", {
-        method: "POST",
-        body: {
-          type: formData.isEscrow ? "ESCROW" : "TRANSFER",
-          direction: formData.transactionDirection,
-          amount: parseFloat(formData.amount),
-          currency: formData.currency,
-          funds_in: formData.depositMode,
-          funds_out: formData.receiveMode,
-        },
-      });
+      const response = await apiJson<TransactionSubmitResponse>(
+        "/api/transaction/submit",
+        {
+          method: "POST",
+          body: {
+            type: formData.isEscrow ? "ESCROW" : "TRANSFER",
+            direction: formData.transactionDirection,
+            amount: parseFloat(formData.amount),
+            currency: formData.currency,
+            funds_in: formData.depositMode,
+            funds_out: formData.receiveMode,
+          },
+        }
+      );
 
       if (response.ok) {
         alert(`Demande envoyée avec succès ! ID: ${response.transaction_id}`);
@@ -133,7 +136,7 @@ export default function TransactionForm() {
           amount: "",
           currency: "",
           depositMode: "",
-          receiveMode: ""
+          receiveMode: "",
         });
       } else {
         setError(response.error || "Erreur serveur");
@@ -145,7 +148,8 @@ export default function TransactionForm() {
     }
   };
 
-  const isSubmitDisabled = !formData.amount ||
+  const isSubmitDisabled =
+    !formData.amount ||
     !formData.currency ||
     !formData.depositMode ||
     !formData.receiveMode ||
@@ -171,7 +175,12 @@ export default function TransactionForm() {
               <select
                 className="form-select"
                 value={formData.transactionDirection}
-                onChange={(e) => handleChange("transactionDirection", e.target.value as TransactionDirection)}
+                onChange={(e) =>
+                  handleChange(
+                    "transactionDirection",
+                    e.target.value as TransactionDirection
+                  )
+                }
                 disabled={formData.isEscrow || loading}
                 style={{ fontSize: 15 }}
               >
@@ -189,7 +198,9 @@ export default function TransactionForm() {
                   disabled={loading}
                   style={{ width: 18, height: 18, accentColor: "#2d6cff" }}
                 />
-                <span style={{ fontSize: 14, color: "#ff6b6b", marginLeft: 10 }}>
+                <span
+                  style={{ fontSize: 14, color: "#ff6b6b", marginLeft: 10 }}
+                >
                   Avec séquestre
                 </span>
               </label>
@@ -206,7 +217,9 @@ export default function TransactionForm() {
               className="form-input"
               placeholder="1000"
               value={formData.amount}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange("amount", e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                handleChange("amount", e.target.value)
+              }
               min="0"
               step="0.01"
               disabled={loading}
@@ -243,7 +256,9 @@ export default function TransactionForm() {
               <select
                 className="form-select"
                 value={formData.depositMode}
-                onChange={(e) => handleChange("depositMode", e.target.value as FundsMode)}
+                onChange={(e) =>
+                  handleChange("depositMode", e.target.value as FundsMode)
+                }
                 disabled={loading}
                 style={{ fontSize: 16 }}
               >
@@ -263,7 +278,9 @@ export default function TransactionForm() {
               <select
                 className="form-select"
                 value={formData.receiveMode}
-                onChange={(e) => handleChange("receiveMode", e.target.value as FundsMode)}
+                onChange={(e) =>
+                  handleChange("receiveMode", e.target.value as FundsMode)
+                }
                 disabled={loading}
                 style={{ fontSize: 16 }}
               >
@@ -291,7 +308,7 @@ export default function TransactionForm() {
               marginTop: 24,
               fontWeight: 600,
               opacity: isSubmitDisabled ? 0.5 : 1,
-              cursor: isSubmitDisabled ? "not-allowed" : "pointer"
+              cursor: isSubmitDisabled ? "not-allowed" : "pointer",
             }}
           >
             {loading ? "Envoi en cours…" : "Envoyer la demande"}

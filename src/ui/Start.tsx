@@ -17,7 +17,7 @@ export default function Start({ kycStatus }: Props) {
     setLoading(true);
     try {
       const c = await requestContactSafe();
-      const tel = `${ c?.contact?.phone_number }`;
+      const tel = `${c?.contact?.phone_number}`;
       if (!tel) throw new Error("Téléphone non partagé.");
       setPhone(tel);
 
@@ -46,7 +46,8 @@ export default function Start({ kycStatus }: Props) {
         {kycStatus === "NOT_STARTED" && (
           <>
             <div className="muted">
-              Merci de partager votre numéro afin de démarrer votre vérification KYC.
+              Merci de partager votre numéro pour passer à l'étape
+              d'identification et de vérification KYC.
             </div>
             <div style={{ height: 10 }} />
             <button className="btn" onClick={sharePhone} disabled={loading}>
@@ -57,25 +58,31 @@ export default function Start({ kycStatus }: Props) {
                 <span className="badge">Téléphone: {phone}</span>
               </div>
             )}
-            {err && <div style={{ marginTop: 10, color: "#ff9aa2" }}>{err}</div>}
+            {err && (
+              <div style={{ marginTop: 10, color: "#ff9aa2" }}>{err}</div>
+            )}
           </>
         )}
 
         {/* SUBMITTED */}
         {kycStatus === "SUBMITTED" && (
-          <div>Merci, votre KYC a été soumis. Validation en cours…</div>
+          <div>Merci, votre KYC a été soumis. La validation est en cours…</div>
         )}
 
         {/* REJECTED */}
         {kycStatus === "REJECTED" && (
           <div style={{ color: "#ff9aa2" }}>
-            KYC refusé. Veuillez contacter le support Saverr.
+            Votre vérification KYC a été refusée. Veuillez contacter le support
+            Saverr.
           </div>
         )}
 
         {/* APPROVED (should not reach here as AppLayout redirects to Wallet) */}
         {kycStatus === "APPROVED" && (
-          <div>KYC approuvé ! Préparation de l'étape suivante…</div>
+          <div>
+            Votre vérification KYC a été approuvée ! Préparation de l'étape
+            suivante…
+          </div>
         )}
       </div>
 
@@ -83,8 +90,13 @@ export default function Start({ kycStatus }: Props) {
       {onboardingUrl && kycStatus === "NOT_STARTED" && (
         <div className="card">
           <div style={{ fontWeight: 700, marginBottom: 6 }}>Lien KYC</div>
-          <a className="btn" href={onboardingUrl} target="_blank" rel="noreferrer">
-            Démarrer ma KYC
+          <a
+            className="btn"
+            href={onboardingUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Démarrer la vérification KYC
           </a>
         </div>
       )}

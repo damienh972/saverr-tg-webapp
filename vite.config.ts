@@ -7,7 +7,7 @@ export default defineConfig(({ mode }): UserConfig => ({
     host: true,
     port: 5173,
     allowedHosts: [
-      "66e444c4ed5e.ngrok-free.app",
+      "pseudogyrate-pleuritic-lesia.ngrok-free.dev",
       "https://demo_bot.saverr.io/"
     ],
   },

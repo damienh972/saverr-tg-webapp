@@ -1,6 +1,9 @@
 import React from "react";
 import { updateTransactionStatus } from "../lib/api";
-import { getFundsInInstructions, getFundsOutInstructions } from "../lib/transactionUtils";
+import {
+  getFundsInInstructions,
+  getFundsOutInstructions,
+} from "../lib/transactionUtils";
 
 type Tx = {
   id: string;
@@ -11,7 +14,7 @@ type Tx = {
   created?: string;
   funds_in?: string;
   funds_out?: string;
-  iban?: string; 
+  iban?: string;
   phone?: string;
 };
 
@@ -54,16 +57,34 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
   }
 
   return (
-    <div className="card" style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
+    <div
+      className="card"
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.6)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 1000,
+      }}
+    >
       <div className="card" style={{ maxWidth: 420, width: "100%" }}>
-        <div className="row" style={{ justifyContent: "space-between", marginBottom: 8 }}>
+        <div
+          className="row"
+          style={{ justifyContent: "space-between", marginBottom: 8 }}
+        >
           <div style={{ fontWeight: 700 }}>Détails de la transaction</div>
           <button onClick={onClose}>✖</button>
         </div>
 
-        {error && <div style={{ color: "#ff9aa2", marginBottom: 8 }}>{error}</div>}
+        {error && (
+          <div style={{ color: "#ff9aa2", marginBottom: 8 }}>{error}</div>
+        )}
 
-        <div style={{ marginBottom: 6 }}>Référence : <b>{tx.reference ?? tx.id}</b></div>
+        <div style={{ marginBottom: 6 }}>
+          Référence : <b>{tx.reference ?? tx.id}</b>
+        </div>
         <div style={{ marginBottom: 6 }}>
           Montant : {tx.amount ?? "—"} {tx.currency ?? ""}
         </div>
@@ -75,16 +96,23 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
         </div>
 
         {tx.status === "PROCESSING" && tx.funds_in && (
-          <div className="card" style={{ marginTop: 16, padding: 12, background: "#f8f9fa" }}>
-            <div style={{ fontWeight: 600, marginBottom: 8 }}>📋 Instructions de dépôt</div>
-            <pre style={{
-              background: "#fff",
-              padding: 12,
-              borderRadius: 8,
-              fontSize: 14,
-              whiteSpace: "pre-wrap",
-              lineHeight: 1.4
-            }}>
+          <div
+            className="card"
+            style={{ marginTop: 16, padding: 12, background: "#f8f9fa" }}
+          >
+            <div style={{ fontWeight: 600, marginBottom: 8 }}>
+              📋 Instructions de dépôt
+            </div>
+            <pre
+              style={{
+                background: "#fff",
+                padding: 12,
+                borderRadius: 8,
+                fontSize: 14,
+                whiteSpace: "pre-wrap",
+                lineHeight: 1.4,
+              }}
+            >
               {getFundsInInstructions(tx.funds_in)}
             </pre>
             <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
@@ -94,16 +122,23 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
         )}
 
         {tx.status === "COMPLETED" && tx.funds_out && (
-          <div className="card" style={{ marginTop: 16, padding: 12, background: "#f0f9f0" }}>
-            <div style={{ fontWeight: 600, marginBottom: 8 }}>🎉 Instructions de retrait</div>
-            <pre style={{
-              background: "#fff",
-              padding: 12,
-              borderRadius: 8,
-              fontSize: 14,
-              whiteSpace: "pre-wrap",
-              lineHeight: 1.4
-            }}>
+          <div
+            className="card"
+            style={{ marginTop: 16, padding: 12, background: "#f0f9f0" }}
+          >
+            <div style={{ fontWeight: 600, marginBottom: 8 }}>
+              🎉 Instructions de retrait
+            </div>
+            <pre
+              style={{
+                background: "#fff",
+                padding: 12,
+                borderRadius: 8,
+                fontSize: 14,
+                whiteSpace: "pre-wrap",
+                lineHeight: 1.4,
+              }}
+            >
               {getFundsOutInstructions(tx.funds_out, tx.iban, tx.phone)}
             </pre>
           </div>
@@ -128,7 +163,11 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
           </div>
         )}
 
-        {loading && <div className="muted" style={{ marginTop: 8 }}>Traitement en cours…</div>}
+        {loading && (
+          <div className="muted" style={{ marginTop: 8 }}>
+            Traitement en cours…
+          </div>
+        )}
       </div>
     </div>
   );

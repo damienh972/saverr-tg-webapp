@@ -14,7 +14,7 @@ export default function AppLayout() {
     try {
       tg?.ready?.();
       tg?.expand?.();
-    } catch { }
+    } catch {}
   }, []);
 
   // Loading screen
@@ -22,7 +22,9 @@ export default function AppLayout() {
     return (
       <div className="container">
         <div className="card">
-          <div style={{ fontSize: 18, fontWeight: 700 }}>Bienvenue chez Saverr</div>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>
+            Saverr, votre assistant personnalisé
+          </div>
           <div className="muted">Chargement…</div>
         </div>
       </div>
@@ -49,8 +51,12 @@ export default function AppLayout() {
     return (
       <div className="container">
         <div className="card">
-          <div style={{ fontSize: 18, fontWeight: 700 }}>Saverr, votre assistant personnalisé</div>
-          <div className="muted">Étape 1/2 : Identification et vérifications</div>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>
+            Saverr, votre assistant personnalisé
+          </div>
+          <div className="muted">
+            Étape 1/2 : Identification et vérifications
+          </div>
         </div>
         <Start kycStatus={kyc} />
       </div>
@@ -62,8 +68,12 @@ export default function AppLayout() {
     return (
       <div className="container">
         <div className="card">
-          <div style={{ fontSize: 18, fontWeight: 700 }}>Saverr, votre assistant personnalisé</div>
-          <div className="muted">Étape 2/2 : Création du portefeuille électronique</div>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>
+            Saverr, votre assistant personnalisé
+          </div>
+          <div className="muted">
+            Étape 2/2 : Création du portefeuille électronique
+          </div>
         </div>
         <Wallet />
       </div>
@@ -72,7 +82,11 @@ export default function AppLayout() {
 
   // Onboarding complete => normal navigation (Home / Me / Transactions)
   // Automatically redirect "/" and "/wallet" to /home
-  if (loc.pathname === "/" || loc.pathname === "/wallet" || loc.pathname === "/kyc") {
+  if (
+    loc.pathname === "/" ||
+    loc.pathname === "/wallet" ||
+    loc.pathname === "/kyc"
+  ) {
     return <Navigate to="/home" replace />;
   }
 
@@ -81,7 +95,9 @@ export default function AppLayout() {
       <div className="card">
         <div className="row" style={{ justifyContent: "space-between" }}>
           <div>
-            <div style={{ fontSize: 18, fontWeight: 700 }}>Bienvenue chez Saverr</div>
+            <div style={{ fontSize: 18, fontWeight: 700 }}>
+              Saverr, votre assistant personnalisé
+            </div>
             <div className="muted">KYC: {kyc}</div>
           </div>
           {loc.pathname !== "/home" && (

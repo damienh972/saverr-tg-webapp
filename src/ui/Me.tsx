@@ -25,7 +25,9 @@ export default function Me() {
           {JSON.stringify(data.user, null, 2)}
         </pre>
       )}
-      {data?.user === null && <div className="muted">Utilisateur introuvable (pas encore en DB ?).</div>}
+      {data?.user === null && (
+        <div className="muted">Vous n'avez pas encore de compte</div>
+      )}
     </div>
   );
 }
