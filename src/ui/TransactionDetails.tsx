@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { TransferButton } from "./TransferButton";
 import { updateTransactionStatus } from "../lib/api";
-import {
-  getFundsInInstructions,
-  getFundsOutInstructions,
-} from "../lib/transactionUtils";
+import { apiJson } from "../lib/api";
+import { getFundsInInstructions, getFundsOutInstructions } from "../lib/transactionUtils";
+import { TransactionButton } from "thirdweb/react";
 
 type Tx = {
   id: string;
@@ -27,7 +26,6 @@ type Props = {
 
 const STATUS_LABELS: Record<string, string> = {
   CREATED: "Créée",
-  AWAITING_CONFIRMATION: "En attente de confirmation",
   PROCESSING: "En cours",
   DEPOSITED: "dépot effectué",
   TRANSFERRED: "transfer effectué",
@@ -42,9 +40,8 @@ function formatStatus(status?: string) {
 
 export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
   const [loading, setLoading] = React.useState(false);
+  const [isSimulating, setIsSimulating] = useState(false);
   const [error, setError] = React.useState<string | null>(null);
-
-  const canConfirmOrCancel = tx.status === "AWAITING_CONFIRMATION";
 
   async function handleStatusChange(status: "PROCESSING" | "CANCELLED" | "TRANSFERRED") {
     try {
@@ -58,6 +55,23 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
       setLoading(false);
     }
   }
+
+  const simulateDeposit = async (txId: string) => {
+    if (isSimulating) return;
+
+    setIsSimulating(true);
+    try {
+      await apiJson(`/api/transaction/${txId}/simulate_deposit`, {
+        method: "POST"
+      });
+      onUpdated({
+        ...tx,
+        status: "DEPOSITED"
+      });
+    } catch (error) {
+      console.error("❌ Simulation échouée:", error);
+    }
+  };
 
   return (
     <div
@@ -98,6 +112,12 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
           Créée le : <span className="muted">{tx.created || ""}</span>
         </div>
 
+        {tx.status === "CREATED" && (
+          <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
+            <p>Votre demande de transaction est en cours de traitement.</p>
+          </div>
+        )}
+
         {tx.status === "PROCESSING" && tx.funds_in && (
           <div
             className="card"
@@ -121,12 +141,24 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
             <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
               Copiez ces informations et effectuez le dépôt
             </div>
+            <TransferButton buttonText="Simuler le dépôt" amount={tx.amount} callback={simulateDeposit} txId={tx.id} />
+            <button
+              style={{
+                marginTop: 12,
+                opacity: isSimulating ? 0.5 : 1,
+                cursor: isSimulating ? "not-allowed" : "pointer" }}
+              className="btn"
+              disabled={isSimulating}
+              onClick={() => simulateDeposit(tx.id)}
+            >
+              {isSimulating ? "dépot effectué" : "Simuler le dépôt"}
+            </button>
           </div>
         )}
 
         {tx.status === "DEPOSITED" && (
           <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
-            <TransferButton amount={tx.amount} callback={handleStatusChange}/>
+            <TransferButton buttonText="Valider le transfert" amount={tx.amount} callback={handleStatusChange} isTransfer={true} />
           </div>
         )}
 
@@ -150,25 +182,6 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
             >
               {getFundsOutInstructions(tx.funds_out, tx.iban, tx.phone)}
             </pre>
-          </div>
-        )}
-
-        {canConfirmOrCancel && (
-          <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
-            <button
-              className="btn btn-primary"
-              disabled={loading}
-              onClick={() => handleStatusChange("PROCESSING")}
-            >
-              ✅ Confirmer
-            </button>
-            <button
-              className="btn btn-secondary"
-              disabled={loading}
-              onClick={() => handleStatusChange("CANCELLED")}
-            >
-              ❌ Annuler
-            </button>
           </div>
         )}
 

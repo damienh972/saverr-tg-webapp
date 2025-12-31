@@ -24,7 +24,14 @@ export default function Wallet() {
   const wallets = useMemo(
     () => [
       inAppWallet({
-        auth: { options: ["email", "google"] },
+        auth: {
+          options: ["email", "google"],
+        },
+        smartAccount: {
+          sponsorGas: true,
+          chain: sepolia
+        },
+       
       }),
     ],
     []
