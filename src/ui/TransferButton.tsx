@@ -1,4 +1,8 @@
-import { ConnectButton, TransactionButton, useActiveAccount } from "thirdweb/react";
+import {
+  ConnectButton,
+  TransactionButton,
+  useActiveAccount,
+} from "thirdweb/react";
 import { sepolia } from "thirdweb/chains";
 import { getContract, prepareContractCall } from "thirdweb";
 import { thirdwebClient } from "../lib/thirdwebClient";
@@ -6,24 +10,36 @@ import { toUSDC } from "../lib/transactionUtils";
 
 const depositAddress = "0x4c0FeD497BC2868E1010C8eC8bEfcfCd3013601b";
 
-export const TransferButton = ({amount,
+export const TransferButton = ({
+  buttonText,
+  amount,
   callback,
+  isTransfer = false,
+  txId = null
 }: {
+  buttonText: string;
   amount: number;
   callback: (result: any) => void;
+  isTransfer?: boolean;
+  txId?: string | null;
 }) => {
   const account = useActiveAccount();
   if (!account) {
-    return <ConnectButton client={thirdwebClient} accountAbstraction={{
-      chain: sepolia,
-      sponsorGas: true
-    }} />;
+    return (
+      <ConnectButton
+        client={thirdwebClient}
+        accountAbstraction={{
+          chain: sepolia,
+          sponsorGas: true,
+        }}
+      />
+    );
   }
 
   const contract = getContract({
     client: thirdwebClient,
     chain: sepolia,
-    address: "0x6B450d0772914E74D933264A5e5c9059071CF08D",
+    address: "0x6359b6B9D0E3C8836160B99aEe77a0aB1F71b34E",
   });
 
   return (
@@ -31,24 +47,21 @@ export const TransferButton = ({amount,
       transaction={() =>
         prepareContractCall({
           contract,
-          method: "function transfer(address to, uint256 value)",
-          params: [depositAddress, toUSDC(amount)],
+          method: isTransfer ? "function transfer(address to, uint256 value)" : "function mintTo(address to, uint256 value)",
+          params: isTransfer ? [depositAddress, toUSDC(amount)] : [account.address, toUSDC(amount)],
         })
       }
       onTransactionSent={(result) =>
         console.log("TX envoyée:", result.transactionHash)
       }
       onTransactionConfirmed={(receipt) => {
-        console.log(
-          "TX confirmée:",
-          receipt.transactionHash,
-          callback("TRANSFERRED")
-        );
+        isTransfer ? callback("TRANSFERRED") : callback(txId);
+        console.log("TX confirmée:", receipt.transactionHash);
       }}
       onError={(error) => console.error("Erreur:", error)}
       payModal={false}
     >
-      ✅ Valider le transfer
+      ✅ {buttonText}
     </TransactionButton>
   );
 };

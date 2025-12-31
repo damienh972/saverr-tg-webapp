@@ -3,6 +3,7 @@ import { TransferButton } from "./TransferButton";
 import { updateTransactionStatus } from "../lib/api";
 import { apiJson } from "../lib/api";
 import { getFundsInInstructions, getFundsOutInstructions } from "../lib/transactionUtils";
+import { TransactionButton } from "thirdweb/react";
 
 type Tx = {
   id: string;
@@ -63,6 +64,10 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
       await apiJson(`/api/transaction/${txId}/simulate_deposit`, {
         method: "POST"
       });
+      onUpdated({
+        ...tx,
+        status: "DEPOSITED"
+      });
     } catch (error) {
       console.error("❌ Simulation échouée:", error);
     }
@@ -111,6 +116,7 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
             <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
               Copiez ces informations et effectuez le dépôt
             </div>
+            <TransferButton buttonText="Simuler le dépôt" amount={tx.amount} callback={simulateDeposit} txId={tx.id} />
             <button
               style={{
                 marginTop: 12,
@@ -127,7 +133,7 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
 
         {tx.status === "DEPOSITED" && (
           <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
-            <TransferButton amount={tx.amount} callback={handleStatusChange} />
+            <TransferButton buttonText="Valider le transfert" amount={tx.amount} callback={handleStatusChange} isTransfer={true} />
           </div>
         )}
 
