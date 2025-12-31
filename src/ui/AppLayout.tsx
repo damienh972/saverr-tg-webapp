@@ -44,7 +44,7 @@ export default function AppLayout() {
   const isApproved = kyc === "APPROVED";
   const hasWallet = !!user?.user_tw_eoa;
 
-  // Step 1: KYC verification (DRAFT / SUBMITTED / REJECTED / APPROVED)
+  // Step 1: KYC verification (DRAFT / PENDING / REJECTED / APPROVED)
   if (!isApproved) {
     return (
       <div className="container">

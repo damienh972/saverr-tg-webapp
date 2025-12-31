@@ -61,8 +61,8 @@ export default function Start({ kycStatus }: Props) {
           </>
         )}
 
-        {/* SUBMITTED */}
-        {kycStatus === "SUBMITTED" && (
+        {/* PENDING */}
+        {kycStatus === "PENDING" && (
           <div>Merci, votre KYC a été soumis. Validation en cours…</div>
         )}
 
