@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ConnectButton, useActiveAccount, useSendTransaction } from "thirdweb/react";
 import { inAppWallet } from "thirdweb/wallets";
 import { sepolia } from "thirdweb/chains";
@@ -19,7 +19,14 @@ export default function Wallet() {
   const wallets = useMemo(
     () => [
       inAppWallet({
-        auth: { options: ["email", "google"] },
+        auth: {
+          options: ["email", "google"],
+        },
+        smartAccount: {
+          sponsorGas: true,
+          chain: sepolia
+        },
+       
       }),
     ],
     []

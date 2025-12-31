@@ -204,7 +204,7 @@ export default function TransactionForm() {
             <input
               type="number"
               className="form-input"
-              placeholder="1000"
+              placeholder="Entrez un montant"
               value={formData.amount}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange("amount", e.target.value)}
               min="0"
