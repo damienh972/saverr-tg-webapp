@@ -185,11 +185,7 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
           </div>
         )}
 
-        {loading && (
-          <div className="muted" style={{ marginTop: 8 }}>
-            Traitement en cours…
-          </div>
-        )}
+        {loading && <div className="muted" style={{ marginTop: 8 }}>Traitement en cours…</div>}
       </div>
     </div>
   );
