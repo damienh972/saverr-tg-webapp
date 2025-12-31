@@ -23,7 +23,7 @@ export default function AppLayout() {
       <div className="container">
         <div className="card">
           <div style={{ fontSize: 18, fontWeight: 700 }}>
-            Saverr, votre assistant personnalisé
+            Bienvenue sur votre assistant de transfert de fonds Saverr
           </div>
           <div className="muted">Chargement…</div>
         </div>
@@ -52,7 +52,7 @@ export default function AppLayout() {
       <div className="container">
         <div className="card">
           <div style={{ fontSize: 18, fontWeight: 700 }}>
-            Saverr, votre assistant personnalisé
+            Bienvenue sur votre assistant de transfert de fonds Saverr
           </div>
           <div className="muted">
             Étape 1/2 : Identification et vérifications
@@ -69,7 +69,7 @@ export default function AppLayout() {
       <div className="container">
         <div className="card">
           <div style={{ fontSize: 18, fontWeight: 700 }}>
-            Saverr, votre assistant personnalisé
+            Bienvenue sur votre assistant de transfert de fonds Saverr
           </div>
           <div className="muted">
             Étape 2/2 : Création du portefeuille électronique
@@ -96,7 +96,7 @@ export default function AppLayout() {
         <div className="row" style={{ justifyContent: "space-between" }}>
           <div>
             <div style={{ fontSize: 18, fontWeight: 700 }}>
-              Saverr, votre assistant personnalisé
+              Bienvenue sur votre assistant de transfert de fonds Saverr
             </div>
             <div className="muted">KYC: {kyc}</div>
           </div>
