@@ -22,10 +22,10 @@ export default function AppLayout() {
     return (
       <div className="container">
         <div className="card">
-          <div style={{ fontSize: 18, fontWeight: 700 }}>
-            Bienvenue sur votre assistant de transfert de fonds Saverr
+          <div className="title-box">
+            <h1 className="title">Bienvenue sur votre assistant de transfert de fonds Saverr</h1>
           </div>
-          <div className="muted">Chargement…</div>
+          <div className="step">Chargement…</div>
         </div>
       </div>
     );
@@ -51,11 +51,11 @@ export default function AppLayout() {
     return (
       <div className="container">
         <div className="card">
-          <div style={{ fontSize: 18, fontWeight: 700 }}>
-            Bienvenue sur votre assistant de transfert de fonds Saverr
+          <div className="title-box">
+            <h1 className="title">Bienvenue sur votre assistant de transfert de fonds Saverr</h1>
           </div>
-          <div className="muted">
-            Étape 1/2 : Identification et vérifications
+          <div className="step">
+            <span className="step-stage">Étape 1/2 :</span> Identification et vérifications
           </div>
         </div>
         <Start kycStatus={kyc} />
@@ -68,11 +68,11 @@ export default function AppLayout() {
     return (
       <div className="container">
         <div className="card">
-          <div style={{ fontSize: 18, fontWeight: 700 }}>
-            Bienvenue sur votre assistant de transfert de fonds Saverr
+          <div className="title-box">
+            <h1 className="title">Bienvenue sur votre assistant de transfert de fonds Saverr</h1>
           </div>
-          <div className="muted">
-            Étape 2/2 : Création du portefeuille électronique
+          <div className="step">
+            <span className="step-stage">Étape 2/2 :</span> Création du portefeuille électronique
           </div>
         </div>
         <Wallet />
@@ -95,10 +95,12 @@ export default function AppLayout() {
       <div className="card">
         <div className="row" style={{ justifyContent: "space-between" }}>
           <div>
-            <div style={{ fontSize: 18, fontWeight: 700 }}>
-              Bienvenue sur votre assistant de transfert de fonds Saverr
+            <div className="title-box">
+              <h1 className="title">
+                Bienvenue sur votre assistant de transfert de fonds Saverr
+              </h1>
             </div>
-            <div className="muted">KYC: {kyc}</div>
+            <div className="step">KYC: {kyc}</div>
           </div>
           {loc.pathname !== "/home" && (
             <Link className="btn secondary" to="/home">

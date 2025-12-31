@@ -1,5 +1,10 @@
 import React, { useEffect, useMemo, useState, useCallback } from "react";
-import { ConnectButton, useActiveAccount, useSendTransaction } from "thirdweb/react";
+import {
+  ConnectButton,
+  useActiveAccount,
+  useSendTransaction,
+  darkTheme,
+} from "thirdweb/react";
 import { inAppWallet } from "thirdweb/wallets";
 import { sepolia } from "thirdweb/chains";
 import { apiJson } from "../lib/api";
@@ -58,7 +63,7 @@ export default function Wallet() {
       method: "POST",
       body: {
         address: addr,
-        telegram_user_id: launch.user?.id
+        telegram_user_id: launch.user?.id,
       },
     })
       .then(() => setSaved(true))
@@ -71,12 +76,27 @@ export default function Wallet() {
         Connexion wallet (thirdweb)
       </div>
       <div className="muted">
-        Connectez-vous avec un Email ou un compte Google pour créer votre
-        portefeuille électronque ainsi que votre IBAN virtuel.
+        <p>
+          Connectez-vous avec un <strong>Email</strong> ou un{" "}
+          <strong>compte Google</strong> pour créer votre
+          <strong> portefeuille électronque</strong> ainsi que votre{" "}
+          <strong>IBAN virtuel</strong>.
+        </p>
       </div>
       <div style={{ height: 10 }} />
 
-      <ConnectButton client={thirdwebClient} wallets={wallets} />
+      <ConnectButton
+        client={thirdwebClient}
+        wallets={wallets}
+        locale={"fr_FR"}
+        connectButton={{ label: "Je me connecte", className: "btn" }}
+        theme={darkTheme({
+          colors: {
+            primaryButtonBg: "hsl(212, 100%, 50%)",
+            primaryButtonText: "hsl(0, 0%, 100%)",
+          },
+        })}
+      />
 
       <div style={{ height: 10 }} />
       {account?.address && (
@@ -88,7 +108,11 @@ export default function Wallet() {
         </div>
       )}
       {err && <div style={{ marginTop: 10, color: "#ff9aa2" }}>{err}</div>}
-      {isDeploying && <div style={{ marginTop: 10, color: "#3b82f6" }}>🚀 Déploiement Smart Account...</div>}
+      {isDeploying && (
+        <div style={{ marginTop: 10, color: "#3b82f6" }}>
+          🚀 Déploiement Smart Account...
+        </div>
+      )}
     </div>
   );
 }

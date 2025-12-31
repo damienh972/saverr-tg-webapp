@@ -40,22 +40,28 @@ export default function Start({ kycStatus }: Props) {
   return (
     <>
       <div className="card">
-        <div style={{ fontWeight: 700, marginBottom: 6 }}>Statut KYC</div>
+        <div>
+          <h2 className="subtitle">Statut de la vérification KYC</h2>
+        </div>
 
         {/* DRAFT */}
         {kycStatus === "DRAFT" && (
           <>
             <div className="muted">
-              Merci de partager votre numéro pour passer à l'étape
-              d'identification et de vérification KYC.
+              <p>
+                Merci de partager votre numéro afin de passer à l'étape d'
+                <strong>identification</strong> et de{" "}
+                <strong>vérification</strong>
+                <strong> KYC</strong>.
+              </p>
             </div>
             <div style={{ height: 10 }} />
             <button className="btn" onClick={sharePhone} disabled={loading}>
-              {loading ? "En cours…" : "Partager mon numéro"}
+              {loading ? "En cours…" : "Je partage mon numéro"}
             </button>
             {phone && (
               <div style={{ marginTop: 10 }}>
-                <span className="badge">Téléphone: {phone}</span>
+                <span className="badge">📱 Téléphone: {phone}</span>
               </div>
             )}
             {err && (
@@ -89,15 +95,19 @@ export default function Start({ kycStatus }: Props) {
       {/* Onboarding link (only shown if DRAFT and URL obtained) */}
       {onboardingUrl && kycStatus === "DRAFT" && (
         <div className="card">
-          <div style={{ fontWeight: 700, marginBottom: 6 }}>Lien KYC</div>
-          <a
-            className="btn"
-            href={onboardingUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Démarrer la vérification KYC
-          </a>
+          <div className="kyc-box">
+            <h2 className="subtitle">Lien vers la vérification KYC</h2>
+          </div>
+          <button className="btn">
+            <a
+              className="kyc-link"
+              href={onboardingUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Je démarre ma <strong>vérification</strong>
+            </a>
+          </button>
         </div>
       )}
     </>
