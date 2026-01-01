@@ -1,41 +1,41 @@
 /*==================== Font faces (inchangés) ====================*/
 @font-face {
   font-family: "GilroyBold";
-  src: url("/src/assets/fonts/Gilroy-Bold.ttf");
+  src: url("assets/fonts/Gilroy-Bold.ttf");
   font-weight: 700;
 }
 @font-face {
   font-family: "GilroyBlack";
-  src: url("/src/assets/fonts/Gilroy-Black.ttf");
+  src: url("assets/fonts/Gilroy-Black.ttf");
   font-weight: 900;
 }
 @font-face {
   font-family: "Roboto";
-  src: url("/src/assets/fonts/Roboto-Regular.ttf");
+  src: url("assets/fonts/Roboto-Regular.ttf");
 }
 @font-face {
   font-family: "Gilroy";
-  src: url("/src/assets/fonts/Gilroy-Medium.ttf");
+  src: url("assets/fonts/Gilroy-Medium.ttf");
   font-weight: 700;
 }
 @font-face {
   font-family: "PoppinsBold";
-  src: url("/src/assets/fonts/Poppins-Bold.ttf");
+  src: url("assets/fonts/Poppins-Bold.ttf");
   font-weight: 700;
 }
 @font-face {
   font-family: "PoppinsMedium";
-  src: url("/src/assets/fonts/Poppins-Medium.ttf");
+  src: url("assets/fonts/Poppins-Medium.ttf");
   font-weight: 500;
 }
 @font-face {
   font-family: "PoppinsRegular";
-  src: url("/src/assets/fonts/Poppins-Regular.ttf");
+  src: url("assets/fonts/Poppins-Regular.ttf");
   font-weight: 400;
 }
 @font-face {
   font-family: "DMSansRegular";
-  src: url("/src/assets/fonts/DMSans-VariableFont.ttf");
+  src: url("assets/fonts/DMSans-VariableFont.ttf");
   font-weight: 400;
 }
 :root {
@@ -106,10 +106,26 @@ a {
   font-family: PoppinsBold;
   font-weight: 700;
   font-size: 16px;
+  text-decoration: none;
 }
 
+.btn-menu {
+  font-family: PoppinsMedium;
+  font-weight: 700;
+  font-size: 16px;
+  color: #4f4f4f;
+  text-decoration: none;
+}
+
+.transfer {
+  margin-top: 20px;
+}
 .kyc-link {
   text-decoration: none;
+}
+
+.kyc-statut {
+  color: #0077FF;
 }
 
 .btn.secondary {

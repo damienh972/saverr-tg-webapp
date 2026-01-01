@@ -23,7 +23,9 @@ export default function AppLayout() {
       <div className="container">
         <div className="card">
           <div className="title-box">
-            <h1 className="title">Bienvenue sur votre assistant de transfert de fonds Saverr</h1>
+            <h1 className="title">
+              Bienvenue sur votre assistant de transfert de fonds Saverr
+            </h1>
           </div>
           <div className="step">Chargement…</div>
         </div>
@@ -52,10 +54,13 @@ export default function AppLayout() {
       <div className="container">
         <div className="card">
           <div className="title-box">
-            <h1 className="title">Bienvenue sur votre assistant de transfert de fonds Saverr</h1>
+            <h1 className="title">
+              Bienvenue sur votre assistant de transfert de fonds Saverr
+            </h1>
           </div>
           <div className="step">
-            <span className="step-stage">Étape 1/2 :</span> Identification et vérifications
+            <span className="step-stage">Étape 1/2 :</span> Identification et
+            vérifications
           </div>
         </div>
         <Start kycStatus={kyc} />
@@ -69,10 +74,13 @@ export default function AppLayout() {
       <div className="container">
         <div className="card">
           <div className="title-box">
-            <h1 className="title">Bienvenue sur votre assistant de transfert de fonds Saverr</h1>
+            <h1 className="title">
+              Bienvenue sur votre assistant de transfert de fonds Saverr
+            </h1>
           </div>
           <div className="step">
-            <span className="step-stage">Étape 2/2 :</span> Création du portefeuille électronique
+            <span className="step-stage">Étape 2/2 :</span> Création du
+            portefeuille électronique
           </div>
         </div>
         <Wallet />
@@ -100,7 +108,12 @@ export default function AppLayout() {
                 Bienvenue sur votre assistant de transfert de fonds Saverr
               </h1>
             </div>
-            <div className="step">KYC: {kyc}</div>
+            <div className="step">
+              <p>
+                Le statut actuel de votre <strong>vérification KYC</strong>:{" "}
+                <span className="kyc-statut">{kyc}</span>
+              </p>
+            </div>
           </div>
           {loc.pathname !== "/home" && (
             <Link className="btn secondary" to="/home">
