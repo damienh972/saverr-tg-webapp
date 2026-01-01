@@ -116,8 +116,9 @@ export default function AppLayout() {
             </div>
           </div>
           {loc.pathname !== "/home" && (
-            <Link className="btn secondary" to="/home">
-              Menu
+            <Link className="btn-menu" to="/home">
+              <p className="menu-text">Retour au menu</p>
+              <img src="../assets/images/right-arrow.jpg" alt="Flèche" />
             </Link>
           )}
         </div>

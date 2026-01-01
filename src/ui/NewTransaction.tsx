@@ -158,9 +158,7 @@ export default function TransactionForm() {
   return (
     <div className="container">
       <div className="card">
-        <div style={{ fontWeight: 700, marginBottom: 16, fontSize: 18 }}>
-          Nouvelle transaction
-        </div>
+        <h2 className="menu-title">Nouvelle transaction</h2>
         <div className="muted" style={{ marginBottom: 24 }}>
           Configurez votre transfert en quelques clics
         </div>

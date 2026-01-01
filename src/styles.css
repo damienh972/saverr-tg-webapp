@@ -71,7 +71,7 @@ a {
   font-weight: 700;
   font-size: 24px;
   line-height: 42px;
-  color: #1B2224
+  color: #1b2224;
 }
 
 .step {
@@ -84,7 +84,7 @@ a {
 
 .step-stage {
   font-family: PoppinsBold;
-  color: #0077FF;
+  color: #0077ff;
 }
 .row {
   display: flex;
@@ -94,10 +94,10 @@ a {
 }
 .subtitle {
   font-size: 18px;
-  color: #1B2224
+  color: #1b2224;
 }
 .btn {
-  background: #0077FF;
+  background: #0077ff;
   border: 0;
   color: white;
   padding: 10px 12px;
@@ -109,23 +109,58 @@ a {
   text-decoration: none;
 }
 
+.link-block {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: 24px;
+  gap: 8px;
+}
+
+.menu-text {
+  font-family: Roboto;
+  font-size: 16px;
+  margin: 0;
+}
+
+img {
+  width: 22px;
+  height: 14px;
+  margin-top: 2px;
+}
 .btn-menu {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
   font-family: PoppinsMedium;
   font-weight: 700;
   font-size: 16px;
-  color: #4f4f4f;
+  color: #0077ff;
   text-decoration: none;
 }
 
-.transfer {
+.menu-title {
+  color: #bdbdbd
+}
+.btn-transfer {
+  background: transparent;
+  border: 2px solid #0077ff;
+  color: #0077ff;
+  padding: 10px 12px;
   margin-top: 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: PoppinsMedium;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
 }
 .kyc-link {
   text-decoration: none;
 }
 
 .kyc-statut {
-  color: #0077FF;
+  color: #0077ff;
 }
 
 .btn.secondary {
@@ -143,11 +178,11 @@ a {
   height: 23px;
   padding: 4px 8px;
   border-radius: 23px;
-  background: #0077FF0D;
+  background: #0077ff0d;
   font-family: PoppinsRegular;
   font-weight: 500;
   font-size: 12px;
-  color: #1B2224;
+  color: #1b2224;
 }
 
 hr {

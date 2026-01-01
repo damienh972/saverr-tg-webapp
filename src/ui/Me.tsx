@@ -17,7 +17,7 @@ export default function Me() {
 
   return (
     <div className="card">
-      <div style={{ fontWeight: 700, marginBottom: 6 }}>Mes informations</div>
+      <h2 className="menu-title">Mes informations</h2>
       {err && <div style={{ color: "#ff9aa2" }}>{err}</div>}
       {!data && !err && <div className="muted">Chargement…</div>}
       {data?.user && (

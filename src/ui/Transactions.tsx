@@ -33,7 +33,7 @@ export default function Transactions() {
 
   return (
     <div className="card">
-      <div style={{ fontWeight: 700, marginBottom: 6 }}>Transactions</div>
+      <h2 className="menu-title">Transactions</h2>
       {err && <div style={{ color: "#ff9aa2" }}>{err}</div>}
       {!err && txs.length === 0 && (
         <div className="muted">Aucune transaction.</div>
