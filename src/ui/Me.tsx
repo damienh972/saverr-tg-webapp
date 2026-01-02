@@ -21,7 +21,7 @@ export default function Me() {
       {err && <div style={{ color: "#ff9aa2" }}>{err}</div>}
       {!data && !err && <div className="muted">Chargement…</div>}
       {data?.user && (
-        <pre style={{ whiteSpace: "pre-wrap", margin: 0 }}>
+        <pre style={{ whiteSpace: "pre-wrap", margin: 0, color: "#676767" }}>
           {JSON.stringify(data.user, null, 2)}
         </pre>
       )}
