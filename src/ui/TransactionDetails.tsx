@@ -25,11 +25,11 @@ type Props = {
 };
 
 const STATUS_LABELS: Record<string, string> = {
-  CREATED: "Créée",
-  PROCESSING: "En cours",
-  DEPOSITED: "dépot effectué",
-  TRANSFERRED: "transfer effectué",
-  COMPLETED: "Terminée",
+  CREATED: "En attente de validation",
+  PROCESSING: "En attente de dépôt",
+  DEPOSITED: "Dépot effectué",
+  TRANSFERRED: "Transfer effectué",
+  COMPLETED: "Opération finalisée",
   CANCELLED: "Annulée",
 };
 
