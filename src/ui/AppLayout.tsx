@@ -108,12 +108,7 @@ export default function AppLayout() {
                 Bienvenue sur votre assistant de transfert de fonds Saverr
               </h1>
             </div>
-            <div className="step">
-              <p>
-                Le statut actuel de votre <strong>vérification KYC</strong>:{" "}
-                <span className="kyc-statut">{kyc}</span>
-              </p>
-            </div>
+
           </div>
           {loc.pathname !== "/home" && (
             <Link className="btn-menu" to="/home">
