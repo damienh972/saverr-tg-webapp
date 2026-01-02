@@ -5,7 +5,7 @@ export default defineConfig(({ mode }): UserConfig => ({
   plugins: [react()],
   server: {
     host: true,
-    port: 8080,
+    port: 5173,
     strictPort: true,
     // add local ngrok host for dev
     allowedHosts: [
