@@ -9,6 +9,7 @@ export default defineConfig(({ mode }): UserConfig => ({
     // add local ngrok host for dev
     allowedHosts: [
       "emelina-nonoxidating-keren.ngrok-free.dev",
+      "posingly-abrogable-audry.ngrok-free.dev",
       "https://demobot.saverr.io"
     ]
   },
