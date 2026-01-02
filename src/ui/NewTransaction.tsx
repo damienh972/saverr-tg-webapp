@@ -1,5 +1,15 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { apiJson } from "../lib/api";
+import {
+  TextField,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
+  Checkbox,
+  Button,
+} from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 type TransactionDirection = "EURO_TO_RDC" | "RDC_TO_EURO";
 type ModeOption = { value: string; label: string };
@@ -20,7 +30,7 @@ interface TransactionSubmitResponse {
   message?: string;
   error?: string;
 }
-
+const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
 export default function TransactionForm() {
   const [formData, setFormData] = useState<FormData>({
     transactionDirection: "EURO_TO_RDC",
@@ -158,7 +168,7 @@ export default function TransactionForm() {
   return (
     <div className="container">
       <div className="card">
-        <h2 className="menu-title">Nouvelle transaction</h2>
+        <h2 className="menu-title">Nouveau transfert</h2>
         <div className="muted" style={{ marginBottom: 24 }}>
           Configurez votre transfert en quelques clics
         </div>
@@ -167,38 +177,45 @@ export default function TransactionForm() {
           {/* Transaction direction and escrow option */}
           <div className="row" style={{ marginBottom: 20 }}>
             <div style={{ flex: 1 }}>
-              <div className="muted" style={{ fontSize: 14, marginBottom: 8 }}>
-                Type de transaction
-              </div>
-              <select
-                className="form-select"
-                value={formData.transactionDirection}
-                onChange={(e) =>
-                  handleChange(
-                    "transactionDirection",
-                    e.target.value as TransactionDirection
-                  )
-                }
-                disabled={formData.isEscrow || loading}
-                style={{ fontSize: 15 }}
-              >
-                <option value="EURO_TO_RDC">Euro → RDC</option>
-                <option value="RDC_TO_EURO">RDC → Euro</option>
-              </select>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Type de transaction
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={formData.transactionDirection}
+                  label="Type de transaction"
+                  required
+                  onChange={(e) =>
+                    handleChange(
+                      "transactionDirection",
+                      e.target.value as TransactionDirection
+                    )
+                  }
+                  disabled={loading}
+                >
+                  <MenuItem value="EURO_TO_RDC">Euro → RDC</MenuItem>
+                  <MenuItem value="RDC_TO_EURO">RDC → Euro</MenuItem>
+                </Select>
+              </FormControl>
             </div>
 
             <div style={{ flex: 1 }}>
               <label className="checkbox-wrapper" style={{ marginTop: 4 }}>
-                <input
-                  type="checkbox"
+                <Checkbox
+                  {...label}
                   checked={formData.isEscrow}
                   onChange={(e) => handleChange("isEscrow", e.target.checked)}
                   disabled={loading}
-                  style={{ width: 18, height: 18, accentColor: "#2d6cff" }}
+                  sx={{
+                    color: "#0077ff",
+                    "&.Mui-checked": {
+                      color: "#0077ff",
+                    },
+                  }}
                 />
-                <span
-                  style={{ fontSize: 14, color: "#ff6b6b", marginLeft: 10 }}
-                >
+                <span style={{ fontSize: 14, color: "#ff6b6b", marginLeft: 1 }}>
                   Avec séquestre
                 </span>
               </label>
@@ -206,111 +223,122 @@ export default function TransactionForm() {
           </div>
 
           {/* Amount input */}
-          <div className="form-group">
-            <div className="muted" style={{ fontSize: 14, marginBottom: 8 }}>
-              Montant à transférer
-            </div>
-            <input
-              type="number"
-              className="form-input"
-              placeholder="Entrez un montant"
-              value={formData.amount}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleChange("amount", e.target.value)
-              }
-              min="0"
-              step="0.01"
-              disabled={loading}
-              style={{ fontSize: 16 }}
-            />
-          </div>
-
-          {/* Currency selection */}
-          <div className="form-group">
-            <div className="muted" style={{ fontSize: 14, marginBottom: 8 }}>
-              Devise
-            </div>
-            <select
-              className="form-select"
-              value={formData.currency}
-              onChange={(e) => handleChange("currency", e.target.value)}
-              disabled={loading}
-              style={{ fontSize: 16 }}
-            >
-              <option value="">Sélectionnez une devise</option>
-              <option value="euro">Euro (EUR)</option>
-              <option value="usd">Dollar américain (USD)</option>
-              <option value="cdf">Franc congolais (CDF)</option>
-              <option value="usdc">USD Coin (USDC)</option>
-            </select>
-          </div>
-
-          {/* Deposit and receive modes */}
-          <div className="row">
-            <div style={{ flex: 1, marginRight: 12 }}>
-              <div className="muted" style={{ fontSize: 14, marginBottom: 8 }}>
-                Mode de dépôt
-              </div>
-              <select
-                className="form-select"
-                value={formData.depositMode}
-                onChange={(e) =>
-                  handleChange("depositMode", e.target.value as FundsMode)
-                }
+          <div className="input-fields">
+            <div className="form-group">
+              <TextField
+                id="outlined-basic"
+                name="MERGE0"
+                label="Montant"
+                type="number"
+                required
+                placeholder="Saisissez votre montant"
+                variant="outlined"
                 disabled={loading}
-                style={{ fontSize: 16 }}
-              >
-                <option value="">Sélectionnez</option>
-                {getDepositOptions().map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
+                value={formData.amount}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  handleChange("amount", e.target.value)
+                }
+              />
+            </div>
+
+            {/* Currency selection */}
+            <div className="form-group">
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Devise</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  className="fields"
+                  value={formData.currency}
+                  label="Devise"
+                  required
+                  onChange={(e) => handleChange("currency", e.target.value)}
+                  disabled={loading}
+                >
+                  <MenuItem value="euro">Euro (EUR)</MenuItem>
+                  <MenuItem value="usd">Dollar américain (USD)</MenuItem>
+                  <MenuItem value="cdf">Franc congolais (CDF)</MenuItem>
+                  <MenuItem value="usdc">USD Coin (USDC)</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            {/* Deposit and receive modes */}
+
+            <div className="form-group">
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Mode de dépôt
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  className="fields"
+                  value={formData.depositMode}
+                  label="Mode de dépôt"
+                  required
+                  onChange={(e) =>
+                    handleChange("depositMode", e.target.value as FundsMode)
+                  }
+                  disabled={loading}
+                >
+                  {getDepositOptions().map((opt) => (
+                    <MenuItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </div>
 
             <div style={{ flex: 1 }}>
-              <div className="muted" style={{ fontSize: 14, marginBottom: 8 }}>
-                Mode de réception
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Mode de réception
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  className="fields"
+                  value={formData.receiveMode}
+                  label="Mode de dépôt"
+                  required
+                  onChange={(e) =>
+                    handleChange("receiveMode", e.target.value as FundsMode)
+                  }
+                  disabled={loading}
+                >
+                  {getReceiveOptions().map((opt) => (
+                    <MenuItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+
+            {error && (
+              <div style={{ marginTop: 12, color: "#ff9aa2", fontSize: 14 }}>
+                {error}
               </div>
-              <select
-                className="form-select"
-                value={formData.receiveMode}
-                onChange={(e) =>
-                  handleChange("receiveMode", e.target.value as FundsMode)
-                }
-                disabled={loading}
-                style={{ fontSize: 16 }}
-              >
-                <option value="">Sélectionnez</option>
-                {getReceiveOptions().map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            )}
+
+            <Button
+              type="submit"
+              className="btn"
+              disabled={isSubmitDisabled}
+              style={{
+                marginTop: 24,
+                fontWeight: 600,
+                opacity: isSubmitDisabled ? 0.5 : 1,
+                cursor: isSubmitDisabled ? "not-allowed" : "pointer",
+              }}
+              variant="outlined"
+              endIcon={<SendIcon />}
+            >
+              {loading ? "Envoi en cours…" : "Envoyer ma demande"}
+            </Button>
           </div>
-
-          {error && (
-            <div style={{ marginTop: 12, color: "#ff9aa2", fontSize: 14 }}>
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            className="btn"
-            disabled={isSubmitDisabled}
-            style={{
-              marginTop: 24,
-              fontWeight: 600,
-              opacity: isSubmitDisabled ? 0.5 : 1,
-              cursor: isSubmitDisabled ? "not-allowed" : "pointer",
-            }}
-          >
-            {loading ? "Envoi en cours…" : "Envoyer la demande"}
-          </button>
         </form>
       </div>
     </div>

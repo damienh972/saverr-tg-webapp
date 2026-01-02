@@ -33,7 +33,7 @@ export default function Transactions() {
 
   return (
     <div className="card">
-      <h2 className="menu-title">Transactions</h2>
+      <h2 className="menu-title">Mes transferts</h2>
       {err && <div style={{ color: "#ff9aa2" }}>{err}</div>}
       {!err && txs.length === 0 && (
         <div className="muted">Aucune transaction.</div>
@@ -46,11 +46,11 @@ export default function Transactions() {
           onClick={() => setSelected(t)}
         >
           <div className="row" style={{ justifyContent: "space-between" }}>
-            <span className="badge">{t.status || "unknown"}</span>
+            <span className={"badge"}>{t.status || "unknown"}</span>
             <span className="muted">{t.created || ""}</span>
           </div>
-          <div style={{ marginTop: 8 }}>
-            Montant: {t.amount ?? "—"} {t.currency ?? ""}
+          <div style={{ marginTop: 8, color: "#676767" }}>
+            Montant: <span style={{color: "#1b2224"}}>{t.amount ?? "—"} {t.currency ?? ""}</span>
           </div>
         </div>
       ))}
