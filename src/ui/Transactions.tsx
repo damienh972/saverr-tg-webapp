@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { apiJson } from "../lib/api";
 import TransactionDetails from "./TransactionDetails";
+import Status from "./Status";
 
 type Tx = {
   id: string;
@@ -46,7 +47,8 @@ export default function Transactions() {
           onClick={() => setSelected(t)}
         >
           <div className="row" style={{ justifyContent: "space-between" }}>
-            <span className={"badge"}>{t.status || "unknown"}</span>
+            {/* <span className={"badge"}>{t.status || "unknown"}</span> */}
+            <Status statusValue={t.status || "N/A"}/>
             <span className="muted">{t.created || ""}</span>
           </div>
           <div style={{ marginTop: 8, color: "#676767" }}>
