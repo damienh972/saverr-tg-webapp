@@ -6,7 +6,7 @@ import Wallet from "./Wallet";
 
 export default function AppLayout() {
   const loc = useLocation();
-  const { user, loading, err } = useMe();
+  const { user, loading, err, refresh } = useMe();
 
   // Initialize Telegram WebApp (expand view, mark as ready)
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function AppLayout() {
             portefeuille électronique
           </div>
         </div>
-        <Wallet />
+        <Wallet onWalletCreated={refresh} />
       </div>
     );
   }
