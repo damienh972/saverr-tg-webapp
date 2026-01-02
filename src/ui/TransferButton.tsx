@@ -1,3 +1,4 @@
+
 import {
   ConnectButton,
   TransactionButton,
@@ -7,6 +8,8 @@ import { sepolia } from "thirdweb/chains";
 import { getContract, prepareContractCall } from "thirdweb";
 import { thirdwebClient } from "../lib/thirdwebClient";
 import { toUSDC } from "../lib/transactionUtils";
+import { useMemo } from "react";
+import { inAppWallet } from "thirdweb/wallets";
 
 const depositAddress = "0x4c0FeD497BC2868E1010C8eC8bEfcfCd3013601b";
 
@@ -24,14 +27,27 @@ export const TransferButton = ({
   txId?: string | null;
 }) => {
   const account = useActiveAccount();
-  if (!account) {
+  const wallets = useMemo(
+      () => [
+        inAppWallet({
+          auth: {
+            options: ["email", "google"],
+          }
+        }),
+      ],
+      []
+  );
+  
+  if (!account?.address) {
     return (
       <ConnectButton
         client={thirdwebClient}
+        wallets={wallets}
         accountAbstraction={{
           chain: sepolia,
           sponsorGas: true,
         }}
+        connectButton={{ label: "Je me connecte", className: "btn" }}
       />
     );
   }

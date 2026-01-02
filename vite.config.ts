@@ -6,9 +6,11 @@ export default defineConfig(({ mode }): UserConfig => ({
   server: {
     host: true,
     port: 5173,
+    strictPort: true,
     // add local ngrok host for dev
     allowedHosts: [
       "emelina-nonoxidating-keren.ngrok-free.dev",
+      "posingly-abrogable-audry.ngrok-free.dev",
       "https://demobot.saverr.io"
     ]
   },

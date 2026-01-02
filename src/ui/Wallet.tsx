@@ -12,7 +12,7 @@ import { getLaunchSafe } from "../lib/tma";
 import { thirdwebClient } from "../lib/thirdwebClient";
 import { prepareTransaction } from "thirdweb";
 
-export default function Wallet() {
+export default function Wallet({ onWalletCreated }: { onWalletCreated: () => void }) {
   const launch = useMemo(() => getLaunchSafe(), []);
   const account = useActiveAccount();
   const [saved, setSaved] = useState(false);
@@ -31,7 +31,7 @@ export default function Wallet() {
           sponsorGas: true,
           chain: sepolia
         },
-       
+
       }),
     ],
     []
@@ -73,45 +73,47 @@ export default function Wallet() {
         telegram_user_id: launch.user?.id,
       },
     })
-      .then(() => setSaved(true))
+      .then(() => { setSaved(true), onWalletCreated(); })
       .catch((e) => setErr(e.message ?? "Erreur"));
   }, [account?.address, saved, launch.user?.id]);
 
   return (
     <div className="card">
       <div style={{ fontWeight: 700, marginBottom: 6 }}>
-        Connexion wallet (thirdweb)
+        Connexion a votre compte
       </div>
       <div className="muted">
         <p>
           Connectez-vous avec un <strong>Email</strong> ou un{" "}
           <strong>compte Google</strong> pour créer votre
-          <strong> portefeuille électronque</strong> ainsi que votre{" "}
+          <strong> portefeuille</strong> ainsi que votre{" "}
           <strong>IBAN virtuel</strong>.
         </p>
       </div>
       <div style={{ height: 10 }} />
 
-      <ConnectButton
-        client={thirdwebClient}
-        wallets={wallets}
-        locale={"fr_FR"}
-        connectButton={{ label: "Je me connecte", className: "btn" }}
-        theme={darkTheme({
-          colors: {
-            primaryButtonBg: "hsl(212, 100%, 50%)",
-            primaryButtonText: "hsl(0, 0%, 100%)",
-          },
-        })}
-      />
+      {!account?.address && (
+        <ConnectButton
+          client={thirdwebClient}
+          wallets={wallets}
+          locale={"fr_FR"}
+          connectButton={{ label: "Je me connecte", className: "btn" }}
+          theme={darkTheme({
+            colors: {
+              primaryButtonBg: "hsl(212, 100%, 50%)",
+              primaryButtonText: "hsl(0, 0%, 100%)",
+            },
+          })}
+        />
+      )}
 
-      <div style={{ height: 10 }} />
+      {/* <div style={{ height: 10 }} />
       {account?.address && (
         <div className="badge">Adresse: {account.address}</div>
-      )}
+      )} */}
       {saved && (
         <div style={{ marginTop: 10 }}>
-          ✅ Votre portefeuille électronique a été enregistré avec succès!
+          ✅ Votre compte a été enregistré avec succès!
         </div>
       )}
       {err && <div style={{ marginTop: 10, color: "#ff9aa2" }}>{err}</div>}

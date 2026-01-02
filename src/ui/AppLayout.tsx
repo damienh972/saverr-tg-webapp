@@ -6,7 +6,7 @@ import Wallet from "./Wallet";
 
 export default function AppLayout() {
   const loc = useLocation();
-  const { user, loading, err } = useMe();
+  const { user, loading, err, refresh } = useMe();
 
   // Initialize Telegram WebApp (expand view, mark as ready)
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function AppLayout() {
             portefeuille électronique
           </div>
         </div>
-        <Wallet />
+        <Wallet onWalletCreated={refresh} />
       </div>
     );
   }
@@ -108,12 +108,7 @@ export default function AppLayout() {
                 Bienvenue sur votre assistant de transfert de fonds Saverr
               </h1>
             </div>
-            <div className="step">
-              <p>
-                Le statut actuel de votre <strong>vérification KYC</strong>:{" "}
-                <span className="kyc-statut">{kyc}</span>
-              </p>
-            </div>
+
           </div>
           {loc.pathname !== "/home" && (
             <Link className="btn-menu" to="/home">
