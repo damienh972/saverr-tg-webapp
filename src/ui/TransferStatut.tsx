@@ -1,5 +1,5 @@
-const Statut = ({ statutValue }) => {
-  const renderClasseName = (text) => {
+const Statut = ({ statutValue } : { statutValue: string }) => {
+  const renderClasseName = (text: string) => {
     switch (text) {
       case "PENDING":
         return "awaiting";
@@ -15,7 +15,7 @@ const Statut = ({ statutValue }) => {
         return "";
     }
   };
-  const renderStatusValue = (text) => {
+  const renderStatusValue = (text: string) => {
     switch (text) {
       case "PENDING":
         return "En attente";
