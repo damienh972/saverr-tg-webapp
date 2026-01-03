@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet, Link, useLocation, Navigate } from "react-router-dom";
+import { Outlet, useLocation, Navigate } from "react-router-dom";
 import { useMe } from "../hooks/useMe";
 import Start from "./Start";
 import Wallet from "./Wallet";

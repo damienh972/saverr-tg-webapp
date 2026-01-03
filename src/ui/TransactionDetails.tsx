@@ -3,11 +3,12 @@ import { NumericFormat } from "react-number-format";
 import { TransferButton } from "./TransferButton";
 import { updateTransactionStatus } from "../lib/api";
 import { apiJson } from "../lib/api";
+import { useMe } from "../hooks/useMe";
 import {
   getFundsInInstructions,
   getFundsOutInstructions,
+  generateCashAddress
 } from "../lib/transactionUtils";
-import { TransactionButton } from "thirdweb/react";
 import Status from "./Status";
 
 type Tx = {
@@ -20,7 +21,6 @@ type Tx = {
   funds_in?: string;
   funds_out?: string;
   iban?: string;
-  phone?: string;
 };
 
 type Props = {
@@ -57,6 +57,7 @@ function currencySymbol(currency: string) {
 }
 
 export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
+  const { user } = useMe();
   const [loading, setLoading] = React.useState(false);
   const [isSimulating, setIsSimulating] = useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -188,6 +189,22 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
           </div>
         )}
 
+        {tx.status === "TRANSFERRED" && (
+          tx.funds_out === "CASH" ? (
+          <div className="muted" style={{ marginTop: 8 }}>
+              Vos fonds sont disponible en especes à l'adresse suivante : 
+              <br />
+              <p style={{margin: "15px 0", fontWeight: "bold"}}>{generateCashAddress()}</p>
+              <br />
+              Présentez vous avec vos documents d'identité.
+          </div>
+          ) : (
+            <div className="muted" style={{ marginTop: 8 }}>
+              Vos fonds sont transférés et en cours de livraison sur votre compte de reception.
+            </div>
+          )
+        )}
+
         {tx.status === "COMPLETED" && tx.funds_out && (
           <div
             className="card"
@@ -206,7 +223,7 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
                 lineHeight: 1.4,
               }}
             >
-              {getFundsOutInstructions(tx.funds_out, tx.iban, tx.phone)}
+              {getFundsOutInstructions(tx.funds_out, tx.iban, user?.phone || "")}
             </pre>
           </div>
         )}

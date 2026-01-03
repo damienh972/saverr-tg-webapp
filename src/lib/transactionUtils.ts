@@ -51,12 +51,12 @@ export function getFundsInInstructions(fundsIn: string): string {
   switch (fundsIn) {
     case "BANK_WIRE":
       const iban = generateIBAN();
-      return `💳 *IBAN de transfert :*\n\`${escapeMarkdown(iban)}\`\n\nEffectuez votre virement vers cet IBAN pour finaliser votre transaction (cela peut prendre jusqu'à 2 jours ouvrés)`;
+      return `💳 IBAN de transfert : \n\ ${escapeMarkdown(iban)} \n\nEffectuez votre virement vers cet IBAN pour finaliser votre transaction (cela peut prendre jusqu'à 2 jours ouvrés)`;
     case "MOBILE_MONEY":
-      return `📱 *Bénéficiaire :*\n${generateMobileMoneyNumber()}\n\nEnvoyez les fonds à ce numéro Mobile Money.`;
+      return `📱 Bénéficiaire : \n${generateMobileMoneyNumber()}\n\nEnvoyez les fonds à ce numéro Mobile Money.`;
     case "CASH":
       const address = generateCashAddress();
-      return `📍 *Point de dépôt :*\nVeuillez vous rendre à :\n${address}\npour déposer vos fonds.`;
+      return `📍 Point de dépôt : \nVeuillez vous rendre à :\n${address}\npour déposer vos fonds.`;
     case "CRYPTO":
       return `⏳ Transfert en cours de traitement.\nVous serez notifié dès la réception des fonds.`;
     default:
@@ -72,14 +72,14 @@ export function getFundsOutInstructions(fundsOut: string, iban?: string, phone?:
   switch (fundsOut) {
     case "BANK_WIRE":
       const userIban = iban || "IBAN non disponible";
-      return `💳 *Fonds envoyés sur votre compte :*\nIBAN : \`${escapeMarkdown(userIban)}\`\n\nLes fonds ont été transférés sur votre compte bancaire.`;
+      return `💳 Fonds envoyés sur votre compte : \nIBAN : \ ${escapeMarkdown(userIban)} \n\nLes fonds ont été transférés sur votre compte bancaire.`;
     case "MOBILE_MONEY":
       const userPhone = phone || "Numéro non disponible";
-      return `📱 *Fonds envoyés :*\nLes fonds ont été envoyés sur votre numéro Mobile Money : ${userPhone}\n\nVérifiez votre solde dans quelques instants.`;
+      return `📱 Fonds envoyés : \nLes fonds ont été envoyés sur votre numéro Mobile Money : +${userPhone}\n\nVérifiez votre solde dans quelques instants.`;
     case "CASH":
       return `✅ Notre partenaire vous remercie de votre visite.\nLes fonds ont été remis en espèces selon les modalités convenues.`;
     case "CRYPTO":
-      return `🔐 *Fonds déposés dans votre coffre numérique.*\nVos cryptomonnaies sont disponibles dans votre portefeuille.`;
+      return `🔐 Fonds déposés dans votre coffre fort numérique. \nVos fonds sont a présent sécurisés.`;
     default:
       return "";
   }
