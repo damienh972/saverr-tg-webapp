@@ -10,7 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type TransactionDirection = "EURO_TO_RDC" | "RDC_TO_EURO";
 type ModeOption = { value: string; label: string };
@@ -33,6 +33,7 @@ interface TransactionSubmitResponse {
 }
 const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
 export default function TransactionForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     transactionDirection: "EURO_TO_RDC",
     isEscrow: false,
@@ -139,8 +140,6 @@ export default function TransactionForm() {
       );
 
       if (response.ok) {
-        alert(`Demande envoyée avec succès ! ID: ${response.transaction_id}`);
-        // Reset form
         setFormData({
           transactionDirection: "EURO_TO_RDC",
           isEscrow: false,
@@ -149,6 +148,10 @@ export default function TransactionForm() {
           depositMode: "",
           receiveMode: "",
         });
+        alert(`Votre demande de transfert a bien été enregistrée. Elle est actuellement en cours de vérification par nos équipes`);
+        // Reset form
+        
+        navigate("/home");
       } else {
         setError(response.error || "Erreur serveur");
       }
