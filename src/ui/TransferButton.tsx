@@ -41,7 +41,7 @@ export const TransferButton = ({
   if (!account?.address) {
     return (
       <>
-        <p>Pour des raisons de sécurité, veuillez vous connecter afin d’autoriser le transfert de fonds.</p>
+        <p style={{ fontStyle: "italic" }}>Pour des raisons de sécurité, veuillez vous connecter afin d’autoriser le transfert de fonds.</p>
         <ConnectButton
           client={thirdwebClient}
           wallets={wallets}
@@ -50,9 +50,6 @@ export const TransferButton = ({
             sponsorGas: true,
           }}
           connectButton={{ label: "Je me connecte" }}
-          switchButton={{
-            style: { background: "#0077ff !important", color: "white", borderRadius: "12px" }
-          }}
         />
       </>
     );
@@ -83,7 +80,7 @@ export const TransferButton = ({
         prepareContractCall({
           contract,
           method: isTransfer ? "function transfer(address to, uint256 value)" : "function mintTo(address to, uint256 value)",
-          params: isTransfer ? [depositAddress, toUSDC(amount)] : [account.address, toUSDC(amount)],
+          params: isTransfer ? [depositAddress, toUSDC(amount)] : [account?.address, toUSDC(amount)],
         })
       }
       onTransactionSent={(result) =>
