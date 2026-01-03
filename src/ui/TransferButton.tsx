@@ -47,7 +47,10 @@ export const TransferButton = ({
           chain: sepolia,
           sponsorGas: true,
         }}
-        connectButton={{ label: "Je me connecte", className: "btn" }}
+        connectButton={{ label: "Je me connecte" }}
+        switchButton={{
+          style: { background: "#0077ff !important", color: "white", borderRadius: "12px" }
+        }}
       />
     );
   }
@@ -60,6 +63,19 @@ export const TransferButton = ({
 
   return (
     <TransactionButton
+      style={{
+        background: "#0077ff",
+        border: 0,
+        color: "white",
+        marginTop: "20px",
+        padding: "10px 12px",
+        borderRadius: "12px",
+        cursor: "pointer",
+        fontFamily: "PoppinsBold",
+        fontWeight: 700,
+        fontSize: "16px",
+        textDecoration: "none",
+      }}
       transaction={() =>
         prepareContractCall({
           contract,
@@ -77,7 +93,7 @@ export const TransferButton = ({
       onError={(error) => console.error("Erreur:", error)}
       payModal={false}
     >
-      ✅ {buttonText}
+      {buttonText}
     </TransactionButton>
   );
 };

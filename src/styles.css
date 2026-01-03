@@ -4,40 +4,48 @@
   src: url("assets/fonts/Gilroy-Bold.ttf");
   font-weight: 700;
 }
+
 @font-face {
   font-family: "GilroyBlack";
   src: url("assets/fonts/Gilroy-Black.ttf");
   font-weight: 900;
 }
+
 @font-face {
   font-family: "Roboto";
   src: url("assets/fonts/Roboto-Regular.ttf");
 }
+
 @font-face {
   font-family: "Gilroy";
   src: url("assets/fonts/Gilroy-Medium.ttf");
   font-weight: 700;
 }
+
 @font-face {
   font-family: "PoppinsBold";
   src: url("assets/fonts/Poppins-Bold.ttf");
   font-weight: 700;
 }
+
 @font-face {
   font-family: "PoppinsMedium";
   src: url("assets/fonts/Poppins-Medium.ttf");
   font-weight: 500;
 }
+
 @font-face {
   font-family: "PoppinsRegular";
   src: url("assets/fonts/Poppins-Regular.ttf");
   font-weight: 400;
 }
+
 @font-face {
   font-family: "DMSansRegular";
   src: url("assets/fonts/DMSans-VariableFont.ttf");
   font-weight: 400;
 }
+
 :root {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
 }
@@ -90,6 +98,7 @@ a {
   font-family: PoppinsBold;
   color: #0077ff;
 }
+
 .row {
   display: flex;
   gap: 10px;
@@ -118,6 +127,11 @@ a {
   text-decoration: none;
 }
 
+.tw-connect-wallet {
+  border: 1px solid #0077ff !important;
+  color: #0077ff !important;
+}
+
 .link-block {
   display: flex;
   flex-direction: row;
@@ -137,6 +151,7 @@ img {
   height: 14px;
   margin-top: 2px;
 }
+
 .btn-menu {
   display: flex;
   flex-direction: row;
@@ -151,6 +166,7 @@ img {
 .menu-title {
   color: #0077ff;
 }
+
 .btn-transfer {
   background: transparent;
   border: 2px solid #0077ff;
@@ -164,6 +180,7 @@ img {
   font-size: 14px;
   text-decoration: none;
 }
+
 .kyc-link {
   text-decoration: none;
 }
@@ -218,6 +235,7 @@ input {
   color: #e7eef7;
   width: 100%;
 }
+
 .input-fields {
   display: flex;
   flex-direction: column;

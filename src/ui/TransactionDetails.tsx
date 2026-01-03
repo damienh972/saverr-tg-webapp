@@ -173,24 +173,7 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
             <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
               Copiez ces informations et effectuez le dépôt
             </div>
-            <TransferButton
-              buttonText="Simuler le dépôt"
-              amount={tx.amount}
-              callback={simulateDeposit}
-              txId={tx.id}
-            />
-            <button
-              style={{
-                marginTop: 12,
-                opacity: isSimulating ? 0.5 : 1,
-                cursor: isSimulating ? "not-allowed" : "pointer",
-              }}
-              className="btn"
-              disabled={isSimulating}
-              onClick={() => simulateDeposit(tx.id)}
-            >
-              {isSimulating ? "dépot effectué" : "Simuler le dépôt"}
-            </button>
+            <TransferButton buttonText={isSimulating ? "dépot effectué" : "Simuler le dépôt"} amount={tx.amount} callback={simulateDeposit} txId={tx.id} />
           </div>
         )}
 
