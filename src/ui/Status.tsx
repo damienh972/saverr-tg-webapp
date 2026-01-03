@@ -15,6 +15,8 @@ const Status = ({ statusValue }: {statusValue: string}) => {
         return "completed label";
       case "CANCELLED":
         return "cancelled label";
+      case "FAILED":
+        return "failed label";
       default:
         return "label";
     }
@@ -28,11 +30,13 @@ const Status = ({ statusValue }: {statusValue: string}) => {
       case "DEPOSITED":
         return "Dépot effectué";
       case "TRANSFERRED":
-        return "Transfer effectué";
+        return "Transfert effectué";
       case "COMPLETED":
         return "Terminé";
       case "CANCELLED":
         return "Annulé";
+      case "FAILED":
+        return "Échec";
       default:
         return "";
     }

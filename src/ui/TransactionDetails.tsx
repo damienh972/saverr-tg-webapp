@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { NumericFormat } from "react-number-format";
 import { TransferButton } from "./TransferButton";
 import { updateTransactionStatus } from "../lib/api";
 import { apiJson } from "../lib/api";
-import { getFundsInInstructions, getFundsOutInstructions } from "../lib/transactionUtils";
+import {
+  getFundsInInstructions,
+  getFundsOutInstructions,
+} from "../lib/transactionUtils";
 import { TransactionButton } from "thirdweb/react";
+import Status from "./Status";
 
 type Tx = {
   id: string;
@@ -38,12 +43,27 @@ function formatStatus(status?: string) {
   return STATUS_LABELS[status] || status;
 }
 
+function currencySymbol(currency: string) {
+  switch (currency) {
+    case "usd":
+      return "$";
+    case "euro":
+      return "€";
+    case "cdf":
+      return "FC";
+    default:
+      return "";
+  }
+}
+
 export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
   const [loading, setLoading] = React.useState(false);
   const [isSimulating, setIsSimulating] = useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
-  async function handleStatusChange(status: "PROCESSING" | "CANCELLED" | "TRANSFERRED") {
+  async function handleStatusChange(
+    status: "PROCESSING" | "CANCELLED" | "TRANSFERRED"
+  ) {
     try {
       setLoading(true);
       setError(null);
@@ -62,11 +82,11 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
     setIsSimulating(true);
     try {
       await apiJson(`/api/transaction/${txId}/simulate_deposit`, {
-        method: "POST"
+        method: "POST",
       });
       onUpdated({
         ...tx,
-        status: "DEPOSITED"
+        status: "DEPOSITED",
       });
     } catch (error) {
       console.error("❌ Simulation échouée:", error);
@@ -91,7 +111,7 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
           className="row"
           style={{ justifyContent: "space-between", marginBottom: 8 }}
         >
-          <div style={{ fontWeight: 700 }}>Détails de la transaction</div>
+          <h3 className="brand">Détails du transfert</h3>
           <button onClick={onClose}>✖</button>
         </div>
 
@@ -99,17 +119,29 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
           <div style={{ color: "#ff9aa2", marginBottom: 8 }}>{error}</div>
         )}
 
-        <div style={{ marginBottom: 6 }}>
+        <div className="transfer-details">
           Référence : <b>{tx.reference ?? tx.id}</b>
         </div>
-        <div style={{ marginBottom: 6 }}>
-          Montant : {tx.amount ?? "—"} {tx.currency ?? ""}
+        <div className="transfer-details">
+          Montant :{" "}
+          <span style={{ color: "#0077ff" }}>
+            <NumericFormat
+              value={parseInt(tx.amount?.toString() || "0")}
+              displayType={"text"}
+              thousandSeparator={" "}
+              decimalScale={2}
+              decimalSeparator={","}
+              fixedDecimalScale={true}
+              suffix={currencySymbol(tx.currency || "")}
+            />
+          </span>
         </div>
-        <div style={{ marginBottom: 6 }}>
-          Statut : <span className="badge">{formatStatus(tx.status)}</span>
+        <div className="transfer-details">
+          Statut : <Status statusValue={tx.status || "N/A"} />
         </div>
-        <div style={{ marginBottom: 6 }}>
-          Créée le : <span className="muted">{tx.created || ""}</span>
+        <div className="transfer-details">
+          Créée le :{" "}
+          <span className="muted">{tx.created?.replace(" ", " à ") || ""}</span>
         </div>
 
         {tx.status === "CREATED" && (
@@ -141,12 +173,18 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
             <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
               Copiez ces informations et effectuez le dépôt
             </div>
-            <TransferButton buttonText="Simuler le dépôt" amount={tx.amount} callback={simulateDeposit} txId={tx.id} />
+            <TransferButton
+              buttonText="Simuler le dépôt"
+              amount={tx.amount}
+              callback={simulateDeposit}
+              txId={tx.id}
+            />
             <button
               style={{
                 marginTop: 12,
                 opacity: isSimulating ? 0.5 : 1,
-                cursor: isSimulating ? "not-allowed" : "pointer" }}
+                cursor: isSimulating ? "not-allowed" : "pointer",
+              }}
               className="btn"
               disabled={isSimulating}
               onClick={() => simulateDeposit(tx.id)}
@@ -158,7 +196,12 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
 
         {tx.status === "DEPOSITED" && (
           <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
-            <TransferButton buttonText="Valider le transfert" amount={tx.amount} callback={handleStatusChange} isTransfer={true} />
+            <TransferButton
+              buttonText="Valider le transfert"
+              amount={tx.amount}
+              callback={handleStatusChange}
+              isTransfer={true}
+            />
           </div>
         )}
 
@@ -185,7 +228,11 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
           </div>
         )}
 
-        {loading && <div className="muted" style={{ marginTop: 8 }}>Traitement en cours…</div>}
+        {loading && (
+          <div className="muted" style={{ marginTop: 8 }}>
+            Traitement en cours…
+          </div>
+        )}
       </div>
     </div>
   );

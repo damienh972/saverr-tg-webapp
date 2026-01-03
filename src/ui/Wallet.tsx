@@ -12,7 +12,11 @@ import { getLaunchSafe } from "../lib/tma";
 import { thirdwebClient } from "../lib/thirdwebClient";
 import { prepareTransaction } from "thirdweb";
 
-export default function Wallet({ onWalletCreated }: { onWalletCreated: () => void }) {
+export default function Wallet({
+  onWalletCreated,
+}: {
+  onWalletCreated: () => void;
+}) {
   const launch = useMemo(() => getLaunchSafe(), []);
   const account = useActiveAccount();
   const [saved, setSaved] = useState(false);
@@ -29,9 +33,8 @@ export default function Wallet({ onWalletCreated }: { onWalletCreated: () => voi
         },
         smartAccount: {
           sponsorGas: true,
-          chain: sepolia
+          chain: sepolia,
         },
-
       }),
     ],
     []
@@ -73,21 +76,21 @@ export default function Wallet({ onWalletCreated }: { onWalletCreated: () => voi
         telegram_user_id: launch.user?.id,
       },
     })
-      .then(() => { setSaved(true), onWalletCreated(); })
+      .then(() => {
+        setSaved(true), onWalletCreated();
+      })
       .catch((e) => setErr(e.message ?? "Erreur"));
   }, [account?.address, saved, launch.user?.id]);
 
   return (
     <div className="card">
-      <div style={{ fontWeight: 700, marginBottom: 6 }}>
-        Connexion a votre compte
-      </div>
+      <h2 className="menu-title">Création de votre compte personnel</h2>
       <div className="muted">
         <p>
-          Connectez-vous avec un <strong>Email</strong> ou un{" "}
+          Liez votre <strong>e-mail</strong> ou votre{" "}
           <strong>compte Google</strong> pour créer votre
-          <strong> portefeuille</strong> ainsi que votre{" "}
-          <strong>IBAN virtuel</strong>.
+          <strong> compte</strong> ainsi que votre <strong>IBAN virtuel</strong>
+          .
         </p>
       </div>
       <div style={{ height: 10 }} />
@@ -100,7 +103,7 @@ export default function Wallet({ onWalletCreated }: { onWalletCreated: () => voi
           connectButton={{ label: "Je me connecte", className: "btn" }}
           theme={darkTheme({
             colors: {
-              primaryButtonBg: "hsl(212, 100%, 50%)",
+              primaryButtonBg: "#0077ff",
               primaryButtonText: "hsl(0, 0%, 100%)",
             },
           })}

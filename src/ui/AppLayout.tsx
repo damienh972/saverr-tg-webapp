@@ -24,7 +24,8 @@ export default function AppLayout() {
         <div className="card">
           <div className="title-box">
             <h1 className="title">
-              Bienvenue sur votre assistant de transfert de fonds Saverr
+              Bienvenue sur votre assistant de transfert de fonds{" "}
+              <span className="brand">Saverr</span>
             </h1>
           </div>
           <div className="step">Chargement…</div>
@@ -55,7 +56,8 @@ export default function AppLayout() {
         <div className="card">
           <div className="title-box">
             <h1 className="title">
-              Bienvenue sur votre assistant de transfert de fonds Saverr
+              Bienvenue sur votre assistant de transfert de fonds{" "}
+              <span className="brand">Saverr</span>
             </h1>
           </div>
           <div className="step">
@@ -75,7 +77,8 @@ export default function AppLayout() {
         <div className="card">
           <div className="title-box">
             <h1 className="title">
-              Bienvenue sur votre assistant de transfert de fonds Saverr
+              Bienvenue sur votre assistant de transfert de fonds{" "}
+              <span className="brand">Saverr</span>
             </h1>
           </div>
           <div className="step">
@@ -105,10 +108,10 @@ export default function AppLayout() {
           <div>
             <div className="title-box">
               <h1 className="title">
-                Bienvenue sur votre assistant de transfert de fonds Saverr
+                Bienvenue sur votre assistant de transfert de fonds{" "}
+                <span className="brand">Saverr</span>
               </h1>
             </div>
-
           </div>
           {loc.pathname !== "/home" && (
             <Link className="btn-menu" to="/home">

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { NumericFormat } from "react-number-format";
 import { apiJson } from "../lib/api";
+import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import TransactionDetails from "./TransactionDetails";
 import Status from "./Status";
 
@@ -32,6 +34,19 @@ export default function Transactions() {
     setSelected(updated);
   }
 
+  function currencySymbol(currency: string) {
+    switch (currency) {
+      case "usd":
+        return "$";
+      case "euro":
+        return "€";
+      case "cdf":
+        return "FC";
+      default:
+        return "";
+    }
+  }
+
   return (
     <div className="card">
       <h2 className="menu-title">Mes transferts</h2>
@@ -48,11 +63,24 @@ export default function Transactions() {
         >
           <div className="row" style={{ justifyContent: "space-between" }}>
             {/* <span className={"badge"}>{t.status || "unknown"}</span> */}
-            <Status statusValue={t.status || "N/A"}/>
-            <span className="muted">{t.created || ""}</span>
+            <Status statusValue={t.status || "N/A"} />
+            <span className="date">
+              {t.created?.substring(0, t.created.length - 9) || ""}
+            </span>
           </div>
-          <div style={{ marginTop: 8, color: "#676767" }}>
-            Montant: <span style={{color: "#1b2224"}}>{t.amount ?? "—"} {t.currency ?? ""}</span>
+          <div style={{ marginTop: 8, color: "#1b2224" }}>
+            Montant:{" "}
+            <span style={{ color: "#0077ff" }}>
+              <NumericFormat
+                value={parseInt(t.amount?.toString() || "0")}
+                displayType={"text"}
+                thousandSeparator={" "}
+                decimalScale={2}
+                decimalSeparator={","}
+                fixedDecimalScale={true}
+                suffix={currencySymbol(t.currency || "")}
+              />
+            </span>
           </div>
         </div>
       ))}
