@@ -87,7 +87,7 @@ export default function Transactions() {
           </div>
           <div style={{ marginTop: 8, color: "#1b2224" }}>
             Montant:{" "}
-            <span style={{ color: "#0077ff" }}>
+            <span style={{ color: "#0077ff", fontWeight: 500 }}>
               <NumericFormat
                 value={parseInt(t.amount?.toString() || "0")}
                 displayType={"text"}
