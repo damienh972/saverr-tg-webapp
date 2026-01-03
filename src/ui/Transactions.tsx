@@ -65,8 +65,18 @@ export default function Transactions() {
           style={{ margin: "10px 0", cursor: "pointer" }}
           onClick={() => setSelected(t)}
         >
-          <div className="row" style={{ justifyContent: "space-between" }}>
+          <div className="row" style={{ justifyContent: "space-between", position: "relative" }}>
             {/* <span className={"badge"}>{t.status || "unknown"}</span> */}
+            {t.status === "DEPOSITED" && (
+              <NewReleasesIcon
+                style={{
+                  position: "absolute",
+                  top: 40,
+                  right: -10,
+                  color: "#EFBF04",
+                }}
+              />
+            )}
             <Status statusValue={t.status || "N/A"} />
             <span className="date">
               {t.created?.substring(0, t.created.length - 9) || ""}
