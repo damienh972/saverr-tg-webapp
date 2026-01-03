@@ -37,6 +37,8 @@ export default function Start({ kycStatus }: Props) {
     }
   };
 
+  const isSharePhoneDisabled = phone !== null || loading;
+
   return (
     <>
       <div className="card">
@@ -56,7 +58,16 @@ export default function Start({ kycStatus }: Props) {
               </p>
             </div>
             <div style={{ height: 10 }} />
-            <button className="btn" onClick={sharePhone} disabled={loading}>
+            <button
+              className="btn"
+              onClick={sharePhone}
+              disabled={isSharePhoneDisabled}
+              style={{
+              marginTop: 24,
+              fontWeight: 600,
+              opacity: isSharePhoneDisabled ? 0.5 : 1,
+              cursor: isSharePhoneDisabled ? "not-allowed" : "pointer",
+            }}>
               {loading ? "En cours…" : "Je partage mon numéro"}
             </button>
             {phone && (

@@ -28,16 +28,16 @@ export const TransferButton = ({
 }) => {
   const account = useActiveAccount();
   const wallets = useMemo(
-      () => [
-        inAppWallet({
-          auth: {
-            options: ["email", "google"],
-          }
-        }),
-      ],
-      []
+    () => [
+      inAppWallet({
+        auth: {
+          options: ["email", "google"],
+        }
+      }),
+    ],
+    []
   );
-  
+
   if (!account?.address) {
     return (
       <ConnectButton
