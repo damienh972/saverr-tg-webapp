@@ -97,7 +97,7 @@ export default function Me() {
               className="menu-text"
               style={{ color: "#1b2224", fontFamily: "Roboto", fontSize: "16px" }}
             >
-              +{data.user.phone}
+              {data.user.phone}
             </div>
           </div>
         </div>

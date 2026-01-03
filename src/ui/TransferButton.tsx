@@ -40,18 +40,21 @@ export const TransferButton = ({
 
   if (!account?.address) {
     return (
-      <ConnectButton
-        client={thirdwebClient}
-        wallets={wallets}
-        accountAbstraction={{
-          chain: sepolia,
-          sponsorGas: true,
-        }}
-        connectButton={{ label: "Je me connecte" }}
-        switchButton={{
-          style: { background: "#0077ff !important", color: "white", borderRadius: "12px" }
-        }}
-      />
+      <>
+        <p>Pour des raisons de sécurité, veuillez vous connecter afin d’autoriser le transfert de fonds.</p>
+        <ConnectButton
+          client={thirdwebClient}
+          wallets={wallets}
+          accountAbstraction={{
+            chain: sepolia,
+            sponsorGas: true,
+          }}
+          connectButton={{ label: "Je me connecte" }}
+          switchButton={{
+            style: { background: "#0077ff !important", color: "white", borderRadius: "12px" }
+          }}
+        />
+      </>
     );
   }
 
