@@ -4,6 +4,7 @@ import { apiJson } from "../lib/api";
 import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import TransactionDetails from "./TransactionDetails";
 import Status from "./Status";
+import { Link } from "react-router-dom";
 
 type Tx = {
   id: string;
@@ -49,6 +50,9 @@ export default function Transactions() {
 
   return (
     <div className="card">
+      <Link className="btn-menu" to="/home">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0077ff"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>
+      </Link>
       <h2 className="menu-title">Mes transferts</h2>
       {err && <div style={{ color: "#ff9aa2" }}>{err}</div>}
       {!err && txs.length === 0 && (

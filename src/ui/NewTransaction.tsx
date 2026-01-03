@@ -10,6 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { Link } from "react-router-dom";
 
 type TransactionDirection = "EURO_TO_RDC" | "RDC_TO_EURO";
 type ModeOption = { value: string; label: string };
@@ -167,6 +168,9 @@ export default function TransactionForm() {
 
   return (
     <div className="card">
+      <Link className="btn-menu" to="/home">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0077ff"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>
+      </Link>
       <h2 className="menu-title">Nouveau transfert</h2>
       <div className="muted" style={{ marginBottom: 24 }}>
         Configurez votre transfert en quelques clics
