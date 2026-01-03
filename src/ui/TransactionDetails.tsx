@@ -138,7 +138,7 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
           </span>
         </div>
         <div className="transfer-details">
-          <p>Statut : </p><Status statusValue={tx.status || "N/A"} />
+          <p className="statut-key">Statut : </p><Status statusValue={tx.status || "N/A"} />
         </div>
         <div className="transfer-details">
           Créée le :{" "}
