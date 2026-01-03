@@ -82,8 +82,7 @@ export default function AppLayout() {
             </h1>
           </div>
           <div className="step">
-            <span className="step-stage">Étape 2/2 :</span> Création du
-            portefeuille électronique
+            <span className="step-stage">Étape 2/2 :</span> Création du compte
           </div>
         </div>
         <Wallet onWalletCreated={refresh} />
