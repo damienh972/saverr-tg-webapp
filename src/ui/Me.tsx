@@ -60,17 +60,16 @@ export default function Me() {
             <div className="subtitle" style={{ marginBottom: "8px", fontSize: "14px" }}>
               Statut KYC
             </div>
-            <span
+            <div
               className="badge"
               style={{
                 ...getKycStatusStyle(data.user.kyc_status),
                 fontFamily: "PoppinsMedium",
                 fontSize: "14px",
-                padding: "6px 12px",
               }}
             >
               {getKycStatusLabel(data.user.kyc_status)}
-            </span>
+            </div>
           </div>
 
           <hr />

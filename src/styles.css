@@ -199,9 +199,11 @@ img {
 }
 
 .badge {
-  display: inline-block;
+  display: flex;
+  width: fit-content;
   height: 23px;
-  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
   border-radius: 23px;
   background: #0077ff0d;
   font-family: PoppinsRegular;
@@ -214,6 +216,7 @@ img {
   display: flex;
   flex-direction: row;
   gap: 6px;
+  align-content: center;
   font-family: PoppinsRegular;
   font-size: 16px;
   margin-bottom: 6px;
