@@ -100,20 +100,10 @@ export default function Wallet({
           client={thirdwebClient}
           wallets={wallets}
           locale={"fr_FR"}
-          connectButton={{ label: "Je me connecte", className: "btn" }}
-          theme={darkTheme({
-            colors: {
-              primaryButtonBg: "#0077ff",
-              primaryButtonText: "hsl(0, 0%, 100%)",
-            },
-          })}
+          connectButton={{ label: "Je me connecte" }}
         />
       )}
 
-      {/* <div style={{ height: 10 }} />
-      {account?.address && (
-        <div className="badge">Adresse: {account.address}</div>
-      )} */}
       {saved && (
         <div style={{ marginTop: 10 }}>
           ✅ Votre compte a été enregistré avec succès!

@@ -174,12 +174,14 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
             <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
               Copiez ces informations et effectuez le dépôt
             </div>
-            <TransferButton buttonText={isSimulating ? "dépot effectué" : "Simuler le dépôt"} amount={tx.amount} callback={simulateDeposit} txId={tx.id} />
+            <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 8 }}>
+              <TransferButton buttonText={isSimulating ? "dépot effectué" : "Simuler le dépôt"} amount={tx.amount} callback={simulateDeposit} txId={tx.id} />
+            </div>
           </div>
         )}
 
         {tx.status === "DEPOSITED" && (
-          <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
+          <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 8 }}>
             <TransferButton
               buttonText="Valider le transfert"
               amount={tx.amount}
@@ -191,13 +193,13 @@ export default function TransactionDetails({ tx, onClose, onUpdated }: Props) {
 
         {tx.status === "TRANSFERRED" && (
           tx.funds_out === "CASH" ? (
-          <div className="muted" style={{ marginTop: 8 }}>
-              Vos fonds sont disponible en especes à l'adresse suivante : 
+            <div className="muted" style={{ marginTop: 8 }}>
+              Vos fonds sont disponible en especes à l'adresse suivante :
               <br />
-              <p style={{margin: "15px 0", fontWeight: "bold"}}>{generateCashAddress()}</p>
+              <p style={{ margin: "15px 0", fontWeight: "bold" }}>{generateCashAddress()}</p>
               <br />
               Présentez vous avec vos documents d'identité.
-          </div>
+            </div>
           ) : (
             <div className="muted" style={{ marginTop: 8 }}>
               Vos fonds sont transférés et en cours de livraison sur votre compte de reception.

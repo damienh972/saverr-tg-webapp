@@ -129,6 +129,13 @@ a {
 .tw-connect-wallet {
   border: 1px solid #0077ff !important;
   color: #0077ff !important;
+  
+}
+
+.tw-connect-wallet:hover {
+  background: #0077ff !important;
+  color: white !important;
+  transition: all 0.4s ease-in-out;
 }
 
 .link-block {
