@@ -260,22 +260,22 @@ input {
   color: #BDBDBD;
  }
 .created {
-  background-color: #f0f0f0;
+  background-color: #ededed;
   color: #4f4f4f;
   font-size: 15px;
   padding: 5px 10px 0px 10px;
 }
 
 .processing {
-  background-color: #C3CCD5 ;
-  color: #485665;
+  background-color: #ccd2d9;
+  color: #011e3f;
   font-size: 15px;
   padding: 5px 10px 0px 10px;
 }
 
 .deposited {
-  background-color: #EFF5FB;
-  color: #B8E1FF;
+  background-color: #fff8e6;
+  color: #fcba04;
   font-size: 15px;
   padding: 5px 10px 0px 10px;
 }
